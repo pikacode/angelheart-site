@@ -1,0 +1,39 @@
+{
+  "id": "TM",
+  "label": "TM",
+  "name": "Test Management",
+  "japaneseName": "テストマネジメント",
+  "subtitle": "Test Manager",
+  "purchaseSubtitle": "Test Management",
+  "certificationName": "Certified Tester Advanced Level Test Management",
+  "isFree": false,
+  "syllabusVersionNote": "JSTQB CTAL-TM v3.0 シラバス対応",
+  "color": {
+    "light": ["#3792AC", "#36778D"],
+    "dark": ["#3591AB", "#26728B"],
+    "buttonLight": ["#3792AC", "#36778D"],
+    "buttonDark": ["#35849B", "#28697F"],
+    "ink": { "light": "#36778D", "dark": "#3591AB" }
+  },
+  "chapterShortNames": { "1": "テスト活動", "2": "プロダクト", "3": "チーム" },
+  "resources": {
+    "catalog": "Syllabus/Catalog/TM/Version3.0.J04",
+    "syllabus": "Syllabus/TM-Custom/Version2.0",
+    "officialSyllabus": "Syllabus/TM/Version3.0.J04"
+  },
+  "mockExam": {
+    "questionCount": 50,
+    "durationMinutes": 120,
+    "passingCount": 33,
+    "passRate": { "label": "2025年度", "percent": 41.76 },
+    "preparationDays": 105,
+    "chapterQuestionCounts": { "1": 26, "2": 15, "3": 9 }
+  },
+  "free": {
+    "syllabusChapters": ["3"],
+    "sampleChapters": ["1", "2"],
+    "practiceChapters": ["3"],
+    "labels": { "free": "第3章", "locked": "第1・2章" }
+  },
+  "answerTypes": ["single"]
+}

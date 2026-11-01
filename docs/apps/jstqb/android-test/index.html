@@ -1,0 +1,80 @@
+<!doctype html>
+<!-- 安卓测试包下载页：输入口令后在浏览器里解密 jstqb.bin 并保存成 APK（只是轻量门槛，不是强保护） -->
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Android 测试包</title>
+  <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Android 测试包</h1>
+    </header>
+    <section>
+      <form id="f">
+        <p><input id="pw" type="password" inputmode="numeric" autocomplete="off" placeholder="密码" style="font-size:20px;padding:8px;width:10em"></p>
+        <p><button type="submit" style="font-size:18px;padding:8px 20px">下载</button></p>
+      </form>
+      <p id="build" class="note"></p>
+      <p id="msg" class="note"></p>
+    </section>
+  </main>
+  <script>
+    const msg = document.getElementById('msg');
+    let data = null;
+    // 构建时间（日本时间）写在 build.json，下载文件名和页面都用它，一眼认出是哪一版
+    let apkName = 'JSTQB.apk';
+    fetch('build.json', { cache: 'no-store' }).then(r => r.json()).then(b => {
+      apkName = 'JSTQB-' + b.stamp + '.apk';
+      document.getElementById('build').textContent = '当前版本：' + apkName + '（dev ' + b.commit + '）';
+    }).catch(() => {});
+    async function load() {
+      if (data) return data;
+      const res = await fetch('jstqb.bin', { cache: 'no-store' });
+      if (!res.ok) throw new Error('下载失败（' + res.status + '）');
+      const total = Number(res.headers.get('content-length')) || 0;
+      const reader = res.body.getReader();
+      const parts = [];
+      let got = 0;
+      for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        parts.push(value);
+        got += value.length;
+        msg.textContent = '下载中… ' + (total ? Math.floor(got * 100 / total) + '%' : Math.floor(got / 1048576) + 'MB');
+      }
+      data = new Uint8Array(got);
+      let off = 0;
+      for (const p of parts) { data.set(p, off); off += p.length; }
+      return data;
+    }
+    document.getElementById('f').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      try {
+        const buf = await load();
+        msg.textContent = '解密中…';
+        const s = crypto.subtle;
+        const base = await s.importKey('raw', new TextEncoder().encode(document.getElementById('pw').value), 'PBKDF2', false, ['deriveKey']);
+        const key = await s.deriveKey({ name: 'PBKDF2', salt: buf.slice(0, 16), iterations: 600000, hash: 'SHA-256' }, base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+        let apk;
+        try {
+          apk = await s.decrypt({ name: 'AES-GCM', iv: buf.slice(16, 28) }, key, buf.subarray(28));
+        } catch (_) {
+          msg.textContent = '密码不对';
+          return;
+        }
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(new Blob([apk], { type: 'application/vnd.android.package-archive' }));
+        a.download = apkName;
+        a.click();
+        msg.textContent = '已保存 ' + apkName + '，在通知栏或「下载」里点它安装。';
+      } catch (err) {
+        msg.textContent = err.message;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+{
+  "id": "ta-custom-2.0",
+  "examName": "CTAL-TA",
+  "version": "2.0",
+  "language": "ja",
+  "resourceName": "TA-Custom/Version2.0",
+  "status": "2.0定稿：全5章17節（原版为唯一来源，逐节审核＋Fable终审定稿）",
+  "chapters": [
+    {
+      "id": "custom-chapter-1",
+      "number": "1",
+      "title": "テストプロセスにおけるテストアナリストのタスク",
+      "pageStart": 13,
+      "pageEnd": 22,
+      "sections": [
+        {
+          "id": "custom-section-1.1",
+          "number": "1.1",
+          "title": "TAの役割とSDLCモデル別の関与",
+          "pageStart": 14,
+          "pageEnd": 14
+        },
+        {
+          "id": "custom-section-1.2",
+          "number": "1.2",
+          "title": "テストアナリストの4つの活動",
+          "pageStart": 14,
+          "pageEnd": 17
+        },
+        {
+          "id": "custom-section-1.3",
+          "number": "1.3",
+          "title": "テストウェアの品質とマネジメント",
+          "pageStart": 17,
+          "pageEnd": 22
+        }
+      ]
+    },
+    {
+      "id": "custom-chapter-2",
+      "number": "2",
+      "title": "リスクベースドテストにおけるテストアナリストのタスク",
+      "pageStart": 23,
+      "pageEnd": 26,
+      "sections": [
+        {
+          "id": "custom-section-2.1",
+          "number": "2.1",
+          "title": "プロダクトリスク分析とTAの役割",
+          "pageStart": 24,
+          "pageEnd": 24
+        },
+        {
+          "id": "custom-section-2.2",
+          "number": "2.2",
+          "title": "リスク軽減とリグレッションテスト選択",
+          "pageStart": 25,
+          "pageEnd": 26
+        }
+      ]
+    },
+    {
+      "id": "custom-chapter-3",
+      "number": "3",
+      "title": "テスト分析とテスト設計",
+      "pageStart": 27,
+      "pageEnd": 39,
+      "sections": [
+        {
+          "id": "custom-section-3.1",
+          "number": "3.1",
+          "title": "ドメイン・組み合わせ・ランダムテスト",
+          "pageStart": 28,
+          "pageEnd": 30
+        },
+        {
+          "id": "custom-section-3.2",
+          "number": "3.2",
+          "title": "動的な振る舞いを扱う3つのテスト技法",
+          "pageStart": 30,
+          "pageEnd": 33
+        },
+        {
+          "id": "custom-section-3.3",
+          "number": "3.3",
+          "title": "ルールに基づく2つのテスト技法",
+          "pageStart": 33,
+          "pageEnd": 35
+        },
+        {
+          "id": "custom-section-3.4",
+          "number": "3.4",
+          "title": "専門知識と経験を指針にするテスト",
+          "pageStart": 35,
+          "pageEnd": 37
+        },
+        {
+          "id": "custom-section-3.5",
+          "number": "3.5",
+          "title": "リスクに応じた技法選択と設計自動化",
+          "pageStart": 37,
+          "pageEnd": 39
+        }
+      ]
+    },
+    {
+      "id": "custom-chapter-4",
+      "number": "4",
+      "title": "品質特性のテスト",
+      "pageStart": 40,
+      "pageEnd": 44,
+      "sections": [
+        {
+          "id": "custom-section-4.1",
+          "number": "4.1",
+          "title": "機能適合性の副特性ごとのテスト",
+          "pageStart": 41,
+          "pageEnd": 41
+        },
+        {
+          "id": "custom-section-4.2",
+          "number": "4.2",
+          "title": "使用性の評価技法とTAの関わり",
+          "pageStart": 42,
+          "pageEnd": 42
+        },
+        {
+          "id": "custom-section-4.3",
+          "number": "4.3",
+          "title": "適応性とインストール性のテスト",
+          "pageStart": 43,
+          "pageEnd": 43
+        },
+        {
+          "id": "custom-section-4.4",
+          "number": "4.4",
+          "title": "互換性の2つの副特性と相互運用性",
+          "pageStart": 43,
+          "pageEnd": 44
+        }
+      ]
+    },
+    {
+      "id": "custom-chapter-5",
+      "number": "5",
+      "title": "ソフトウェア欠陥予防",
+      "pageStart": 45,
+      "pageEnd": 51,
+      "sections": [
+        {
+          "id": "custom-section-5.1",
+          "number": "5.1",
+          "title": "欠陥予防でのTAの貢献と評価",
+          "pageStart": 46,
+          "pageEnd": 46
+        },
+        {
+          "id": "custom-section-5.2",
+          "number": "5.2",
+          "title": "モデルとレビューによるフェーズ内封じ込め",
+          "pageStart": 47,
+          "pageEnd": 49
+        },
+        {
+          "id": "custom-section-5.3",
+          "number": "5.3",
+          "title": "テスト結果の分析と欠陥分類",
+          "pageStart": 49,
+          "pageEnd": 51
+        }
+      ]
+    }
+  ]
+}

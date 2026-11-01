@@ -1,0 +1,94 @@
+:root {
+  color-scheme: light;
+  --background: #f5f5f7;
+  --surface: #ffffff;
+  --text: #1d1d1f;
+  --secondary: #6e6e73;
+  --accent: #4d95c8;
+  --border: #e5e5ea;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+  line-height: 1.7;
+}
+
+main {
+  width: min(100% - 32px, 720px);
+  margin: 0 auto;
+  padding: 56px 0 72px;
+}
+
+header { margin-bottom: 28px; }
+h1, h2, p { margin-top: 0; }
+
+h1 {
+  margin-bottom: 8px;
+  font-size: clamp(28px, 6vw, 40px);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.lead { margin-bottom: 0; color: var(--secondary); font-size: 16px; }
+
+section {
+  margin-top: 16px;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+}
+
+h2 { margin-bottom: 12px; font-size: 20px; line-height: 1.35; }
+ul, ol { margin: 0; padding-left: 1.4em; }
+a { color: var(--accent); overflow-wrap: anywhere; }
+.note { color: var(--secondary); font-size: 14px; }
+.links { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 20px; }
+
+.app-download {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 160px;
+  gap: 24px;
+  align-items: center;
+}
+
+.app-download h2 { margin-bottom: 8px; }
+.app-name { margin-bottom: 4px; font-size: 20px; font-weight: 600; }
+
+.app-store-link {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.app-store-link:hover { opacity: 0.9; }
+
+.app-qr { margin: 0; text-align: center; }
+.app-qr img { display: block; width: 160px; height: 160px; margin: 0 auto 8px; }
+.app-qr figcaption { color: var(--secondary); font-size: 13px; }
+
+footer {
+  margin-top: 28px;
+  color: var(--secondary);
+  font-size: 13px;
+  text-align: center;
+}
+
+footer a { color: var(--secondary); }
+
+@media (max-width: 480px) {
+  main { padding-top: 36px; }
+  section { padding: 20px; }
+  .app-download { grid-template-columns: 1fr; }
+  .app-download-copy { text-align: center; }
+}

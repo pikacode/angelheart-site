@@ -1,0 +1,66 @@
+{
+  "id": "tm-2023-v3.0.j04",
+  "examName": "CTAL-TM",
+  "version": "Version 3.0.J04",
+  "resourceName": "TM_Version3.0.J04",
+  "chapters": [
+    {
+      "id": "chapter-0",
+      "number": "0",
+      "title": "イントロダクション",
+      "pageStart": 11,
+      "pageEnd": 16,
+      "sections": [
+        {"id":"section-0.1","number":"0.1","title":"本シラバスの目的","pageStart":11,"pageEnd":11},
+        {"id":"section-0.2","number":"0.2","title":"テスト技術者資格制度Advanced Level Test Management","pageStart":11,"pageEnd":11},
+        {"id":"section-0.3","number":"0.3","title":"テスト担当者のキャリアパス","pageStart":11,"pageEnd":11},
+        {"id":"section-0.4","number":"0.4","title":"ビジネス成果","pageStart":12,"pageEnd":12},
+        {"id":"section-0.5","number":"0.5","title":"試験対象の学習の目的と知識レベル","pageStart":12,"pageEnd":13},
+        {"id":"section-0.6","number":"0.6","title":"Advanced Level Test Managementの資格認定試験","pageStart":13,"pageEnd":13},
+        {"id":"section-0.7","number":"0.7","title":"認定審査","pageStart":13,"pageEnd":13},
+        {"id":"section-0.8","number":"0.8","title":"標準の取り扱い","pageStart":13,"pageEnd":13},
+        {"id":"section-0.9","number":"0.9","title":"詳細レベル","pageStart":13,"pageEnd":14},
+        {"id":"section-0.10","number":"0.10","title":"本シラバスの構成","pageStart":14,"pageEnd":15},
+        {"id":"section-0.11","number":"0.11","title":"シラバスの基本的な前提","pageStart":15,"pageEnd":16}
+      ]
+    },
+    {
+      "id": "chapter-1",
+      "number": "1",
+      "title": "テスト活動のマネジメント",
+      "pageStart": 17,
+      "pageEnd": 48,
+      "sections": [
+        {"id":"section-1.1","number":"1.1","title":"テストプロセス","pageStart":19,"pageEnd":21},
+        {"id":"section-1.2","number":"1.2","title":"テストのコンテキスト","pageStart":22,"pageEnd":28},
+        {"id":"section-1.3","number":"1.3","title":"リスクベースドテスト","pageStart":29,"pageEnd":34},
+        {"id":"section-1.4","number":"1.4","title":"プロジェクトテスト戦略","pageStart":35,"pageEnd":38},
+        {"id":"section-1.5","number":"1.5","title":"テストプロセス改善","pageStart":39,"pageEnd":43},
+        {"id":"section-1.6","number":"1.6","title":"テストツール","pageStart":44,"pageEnd":48}
+      ]
+    },
+    {
+      "id": "chapter-2",
+      "number": "2",
+      "title": "プロダクトのマネジメント",
+      "pageStart": 49,
+      "pageEnd": 64,
+      "sections": [
+        {"id":"section-2.1","number":"2.1","title":"テストメトリクス","pageStart":50,"pageEnd":53},
+        {"id":"section-2.2","number":"2.2","title":"テスト見積り","pageStart":54,"pageEnd":57},
+        {"id":"section-2.3","number":"2.3","title":"欠陥マネジメント","pageStart":58,"pageEnd":64}
+      ]
+    },
+    {
+      "id": "chapter-3",
+      "number": "3",
+      "title": "チームのマネジメント",
+      "pageStart": 65,
+      "pageEnd": 74,
+      "sections": [
+        {"id":"section-3.1","number":"3.1","title":"テストチーム","pageStart":66,"pageEnd":71},
+        {"id":"section-3.2","number":"3.2","title":"ステークホルダーとの関係","pageStart":72,"pageEnd":74}
+      ]
+    }
+  ]
+}

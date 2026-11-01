@@ -1,0 +1,55 @@
+{
+  "id": "ctfl-2023-v4.0.j02",
+  "examName": "CTFL",
+  "version": "Version 2023V4.0.J02",
+  "resourceName": "CTFL_Version2023V4.0.J02",
+  "chapters": [
+    {"id":"chapter-0","number":"0","title":"イントロダクション","pageStart":11,"pageEnd":14,"sections":[
+      {"id":"section-0.1","number":"0.1","title":"本シラバスの目的","pageStart":11,"pageEnd":11},
+      {"id":"section-0.2","number":"0.2","title":"ソフトウェアテスト向けテスト技術者資格制度 Foundation Level","pageStart":11,"pageEnd":11},
+      {"id":"section-0.3","number":"0.3","title":"テスト担当者のキャリアパス","pageStart":11,"pageEnd":11},
+      {"id":"section-0.4","number":"0.4","title":"ビジネス成果","pageStart":12,"pageEnd":12},
+      {"id":"section-0.5","number":"0.5","title":"試験対象の学習の目的と知識レベル","pageStart":12,"pageEnd":12},
+      {"id":"section-0.6","number":"0.6","title":"Foundation Level の認定資格試験","pageStart":13,"pageEnd":13},
+      {"id":"section-0.7","number":"0.7","title":"認定審査","pageStart":13,"pageEnd":13},
+      {"id":"section-0.8","number":"0.8","title":"標準の取り扱い","pageStart":13,"pageEnd":13},
+      {"id":"section-0.9","number":"0.9","title":"最新情報の維持","pageStart":13,"pageEnd":13},
+      {"id":"section-0.10","number":"0.10","title":"詳細レベル","pageStart":13,"pageEnd":13},
+      {"id":"section-0.11","number":"0.11","title":"本シラバスの構成","pageStart":14,"pageEnd":14}
+    ]},
+    {"id":"chapter-1","number":"1","title":"テストの基礎","pageStart":15,"pageEnd":24,"sections":[
+      {"id":"section-1.1","number":"1.1","title":"テストとは何か？","pageStart":16,"pageEnd":17},
+      {"id":"section-1.2","number":"1.2","title":"なぜテストが必要か？","pageStart":17,"pageEnd":18},
+      {"id":"section-1.3","number":"1.3","title":"テストの原則","pageStart":18,"pageEnd":19},
+      {"id":"section-1.4","number":"1.4","title":"テスト活動、テストウェア、そして役割","pageStart":19,"pageEnd":22},
+      {"id":"section-1.5","number":"1.5","title":"テストに必要不可欠なスキルとよい実践例","pageStart":22,"pageEnd":24}
+    ]},
+    {"id":"chapter-2","number":"2","title":"ソフトウェア開発ライフサイクル全体を通してのテスト","pageStart":25,"pageEnd":32,"sections":[
+      {"id":"section-2.1","number":"2.1","title":"コンテキストに応じたソフトウェア開発ライフサイクルでのテスト","pageStart":26,"pageEnd":28},
+      {"id":"section-2.2","number":"2.2","title":"テストレベルとテストタイプ","pageStart":29,"pageEnd":31},
+      {"id":"section-2.3","number":"2.3","title":"メンテナンス（保守）テスト","pageStart":31,"pageEnd":32}
+    ]},
+    {"id":"chapter-3","number":"3","title":"静的テスト","pageStart":33,"pageEnd":37,"sections":[
+      {"id":"section-3.1","number":"3.1","title":"静的テストの基本","pageStart":34,"pageEnd":35},
+      {"id":"section-3.2","number":"3.2","title":"フィードバックとレビュープロセス","pageStart":35,"pageEnd":37}
+    ]},
+    {"id":"chapter-4","number":"4","title":"テスト分析と設計","pageStart":38,"pageEnd":47,"sections":[
+      {"id":"section-4.1","number":"4.1","title":"テスト技法の概要","pageStart":39,"pageEnd":39},
+      {"id":"section-4.2","number":"4.2","title":"ブラックボックステスト技法","pageStart":39,"pageEnd":42},
+      {"id":"section-4.3","number":"4.3","title":"ホワイトボックステスト技法","pageStart":42,"pageEnd":43},
+      {"id":"section-4.4","number":"4.4","title":"経験ベースのテスト技法","pageStart":43,"pageEnd":44},
+      {"id":"section-4.5","number":"4.5","title":"コラボレーションベースのテストアプローチ","pageStart":45,"pageEnd":47}
+    ]},
+    {"id":"chapter-5","number":"5","title":"テスト活動のマネジメント","pageStart":48,"pageEnd":58,"sections":[
+      {"id":"section-5.1","number":"5.1","title":"テスト計画","pageStart":49,"pageEnd":52},
+      {"id":"section-5.2","number":"5.2","title":"リスクマネジメント","pageStart":52,"pageEnd":54},
+      {"id":"section-5.3","number":"5.3","title":"テストモニタリング、テストコントロールとテスト完了","pageStart":54,"pageEnd":56},
+      {"id":"section-5.4","number":"5.4","title":"構成管理","pageStart":56,"pageEnd":57},
+      {"id":"section-5.5","number":"5.5","title":"欠陥マネジメント","pageStart":57,"pageEnd":58}
+    ]},
+    {"id":"chapter-6","number":"6","title":"テストツール","pageStart":59,"pageEnd":61,"sections":[
+      {"id":"section-6.1","number":"6.1","title":"テストのためのツールによる支援","pageStart":60,"pageEnd":60},
+      {"id":"section-6.2","number":"6.2","title":"テスト自動化の利点とリスク","pageStart":60,"pageEnd":61}
+    ]}
+  ]
+}

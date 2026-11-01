@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <title>打开 Claude</title>
+  <link rel="stylesheet" href="/assets/site.css">
+  <style>
+    .open[hidden] { display: none; }
+    .open { display: block; margin-top: 30vh; padding: 18px 24px; border-radius: 16px; background: var(--accent); color: #fff; font-size: 18px; font-weight: 600; text-align: center; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="open" id="open" hidden>打开</a>
+  </main>
+  <script>
+    // 设计画布里的链接经过这里叫起 Claude 桌面端：?project=chan_…&thread=cmsg_…&name=串名
+    // 只接受这两种 id 格式，拼出固定的 claude:// 地址，不做任意跳转。
+    (function () {
+      var q = new URLSearchParams(location.search);
+      var project = q.get('project') || '';
+      var thread = q.get('thread') || '';
+      if (!/^chan_[A-Za-z0-9]{10,64}$/.test(project) || !/^cmsg_[A-Za-z0-9]{10,80}$/.test(thread)) return;
+      var url = 'claude://claude.ai/code/project/' + project + '?thread=' + thread;
+      var name = (q.get('name') || '').slice(0, 60);
+      var btn = document.getElementById('open');
+      btn.href = url;
+      btn.textContent = name ? '打开设计串：' + name : '打开设计串';
+      btn.hidden = false;
+      // 什么时候关这个标签页，分两种情况：
+      // 1) Chrome 先弹「要打开 Claude 吗？」：弹窗出来时页面失去焦点，点完弹窗焦点回来，再关。
+      //    失去焦点时不能马上关，否则会把确认框一起关掉（10-29「弹一下就没了」）。
+      // 2) 勾过「始终允许」、不弹窗：直接切到桌面端，焦点不会回来，原来要等用户切回浏览器才关（10-31「返回才关」）。
+      //    所以记住这台浏览器是哪种：失去焦点 15 秒以上才回来，说明没弹窗、是桌面端接手了，以后失去焦点就直接关。
+      //    点完弹窗回来（15 秒内）说明还会弹窗，就不记，下次照第 1 种。
+      // 这个标签页是画布用新标签打开的、只有一条历史，浏览器允许脚本关闭；关不掉时按钮留着备用。
+      var KEY = 'go-claude-no-dialog';
+      var noDialog = false;
+      try { noDialog = localStorage.getItem(KEY) === '1'; } catch (e) {}
+      var done = false;
+      var blurredAt = 0;
+      function closeSoon(delay) {
+        if (done) return;
+        done = true;
+        setTimeout(function () { window.close(); }, delay);
+      }
+      window.addEventListener('blur', function () {
+        blurredAt = Date.now();
+        if (noDialog) closeSoon(800);
+      });
+      window.addEventListener('focus', function () {
+        if (!blurredAt) return;
+        var away = Date.now() - blurredAt;
+        try {
+          if (away > 15000) localStorage.setItem(KEY, '1');
+          else localStorage.removeItem(KEY);
+        } catch (e) {}
+        closeSoon(1000);
+      });
+      document.addEventListener('visibilitychange', function () { if (document.hidden) closeSoon(1000); });
+      location.href = url;
+    })();
+  </script>
+</body>
+</html>
