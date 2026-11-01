@@ -42,18 +42,32 @@
     (function () {
       const light = { white: [250, 250, 250], gray: [246, 246, 246], cream: [250, 247, 240], mint: [240, 246, 241], blue: [240, 244, 250] };
       const darkShift = [230, 228, 225];
-      let rgb = light.white, dark = false;
+      let rgb = light.white, mode = '';
       try {
         const saved = JSON.parse(localStorage.getItem('flutter.appAppearance.pageBackground') || 'null');
         if (light[saved]) rgb = light[saved];
-        const mode = localStorage.getItem('flutter.appAppearance.themeMode') || '';
-        dark = mode.includes('dark') || (!mode.includes('light') && matchMedia('(prefers-color-scheme: dark)').matches);
+        mode = localStorage.getItem('flutter.appAppearance.themeMode') || '';
       } catch (_) {}
-      if (dark) rgb = rgb.map((v, i) => Math.max(0, v - darkShift[i]));
-      const css = '#' + rgb.map((v) => v.toString(16).padStart(2, '0')).join('').toUpperCase();
+      const followsSystem = !mode.includes('dark') && !mode.includes('light');
+      const dark = mode.includes('dark') || (followsSystem && matchMedia('(prefers-color-scheme: dark)').matches);
+      const hex = (c) => '#' + c.map((v) => v.toString(16).padStart(2, '0')).join('').toUpperCase();
+      const lightCss = hex(rgb), darkCss = hex(rgb.map((v, i) => Math.max(0, v - darkShift[i])));
+      const css = dark ? darkCss : lightCss;
       document.documentElement.style.setProperty('--page', css);
       document.documentElement.style.background = css;
-      document.querySelector('meta[name="theme-color"]').setAttribute('content', css);
+      // 跟系统时 theme-color 分浅深两条：运行中切系统浅深色，浏览器按 media 自己挑（JST-307）。
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (followsSystem) {
+        meta.setAttribute('content', lightCss);
+        meta.setAttribute('media', '(prefers-color-scheme: light)');
+        const darkMeta = document.createElement('meta');
+        darkMeta.setAttribute('name', 'theme-color');
+        darkMeta.setAttribute('content', darkCss);
+        darkMeta.setAttribute('media', '(prefers-color-scheme: dark)');
+        meta.after(darkMeta);
+      } else {
+        meta.setAttribute('content', css);
+      }
     })();
   </script>
   <link rel="manifest" href="manifest.json">
