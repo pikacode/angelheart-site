@@ -8,7 +8,7 @@
     },
     "tagline": "読む・解く・試す",
     "appStoreID": "6811751328",
-    "playStoreID": "me.pikacode.jstqb.android",
+    "playStoreID": "ai.angelheart.jstqb",
     "playStoreLive": false,
     "supportEmail": "support@angelheart.ai",
     "links": {
@@ -346,7 +346,7 @@
   "firebase": {
     "android": {
       "apiKey": "AIzaSyDBR8Edsi1tVEkQZeHY1Hmf7OYQ1N0_ZHU",
-      "appId": "1:23389998110:android:22c7d6c20a62032071320f",
+      "appId": "1:23389998110:android:f840e80b0a33b22e71320f",
       "messagingSenderId": "23389998110",
       "projectId": "pikacode-jstqb",
       "authDomain": "angelheart.ai",
