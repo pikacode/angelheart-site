@@ -28,8 +28,8 @@
       "試験の申込みや最新の情報は、JSTQB公式サイトでご確認ください。"
     ],
     "syllabusAbout": {
-      "intro": "JSTQBシラバスの学習目標をもとに、試験に出るところを読みやすく書き下ろした解説です。",
-      "disclaimer": "JSTQB・ISTQBの公式教材ではありません。個人が開発した非公式アプリです。"
+      "intro": "試験に出るところを、シラバスに沿って読みやすく解説しています。",
+      "disclaimer": "JSTQB・ISTQBの公式教材ではない、個人開発の非公式アプリです。"
     },
     "markPractice": {
       "text": "テストは欠陥があることは示せるが、欠陥がないことは示せない。",
@@ -344,6 +344,7 @@
       "appId": "1:23389998110:android:22c7d6c20a62032071320f",
       "messagingSenderId": "23389998110",
       "projectId": "pikacode-jstqb",
+      "authDomain": "angelheart.ai",
       "storageBucket": "pikacode-jstqb.firebasestorage.app"
     },
     "web": {
@@ -351,7 +352,7 @@
       "appId": "1:23389998110:ios:427448e4b92ea92d71320f",
       "messagingSenderId": "23389998110",
       "projectId": "pikacode-jstqb",
-      "authDomain": "pikacode-jstqb.firebaseapp.com",
+      "authDomain": "angelheart.ai",
       "storageBucket": "pikacode-jstqb.firebasestorage.app"
     }
   },
