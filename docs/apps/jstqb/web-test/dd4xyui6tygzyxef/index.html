@@ -94,6 +94,19 @@
     #boot .progress { position: absolute; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; transition: opacity .2s linear; }
     #boot.leaving img { visibility: hidden; }
     #boot.leaving .progress { opacity: 0; }
+    /* 要等时（pika 10-31 选「只在要等时放书倒下」）：CTFL 那本单独一张图，同一版刷新等过 0.5 秒就照启动页倒向 TM；
+       等过 2 秒还没出来，App 名下面出三个跳动的点（三科色），一直跳到出来。真在下载时只亮进度条，不出点。 */
+    #boot .dots { position: absolute; left: 0; right: 0; display: flex; justify-content: center; gap: 8px; visibility: hidden; transition: opacity .2s linear; }
+    #boot.waiting .dots { visibility: visible; }
+    #boot.loading .dots, #boot.quiet .dots { visibility: hidden; }
+    #boot.leaving .dots { opacity: 0; }
+    #boot .dots i { width: 8px; height: 8px; border-radius: 50%; animation: boot-dot 1.2s ease-in-out infinite; }
+    #boot .dots i:nth-child(1) { background: #33A9DD; }
+    #boot .dots i:nth-child(2) { background: #3792AC; animation-delay: .15s; }
+    #boot .dots i:nth-child(3) { background: #3CAEA8; animation-delay: .3s; }
+    #boot.wide .dots { gap: calc(10px * var(--k)); }
+    #boot.wide .dots i { width: calc(10px * var(--k)); height: calc(10px * var(--k)); }
+    @keyframes boot-dot { 0%, 60%, 100% { transform: translateY(0); opacity: .35; } 30% { transform: translateY(-6px); opacity: 1; } }
     /* 进度条默认不显示：只有真要下载才亮（pika 10-30「不需要下载不要假装下载」）。 */
     #boot .progress { visibility: hidden; }
     #boot.loading .progress { visibility: visible; }
@@ -114,14 +127,16 @@
 </head>
 <body>
   <div id="boot" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="読み込み中">
-    <img alt="">
+    <img class="base" alt=""><img class="ctfl" alt="">
+    <div class="dots"><i></i><i></i><i></i></div>
     <div class="progress"><div class="track"><div class="fill"></div></div><div class="line"><span class="label">テスト環境を構築中</span><span class="pct"></span></div></div>
   </div>
   <script>
     (function () {
       const root = document.getElementById('boot');
       const fill = root.querySelector('.fill'), label = root.querySelector('.label'), pct = root.querySelector('.pct');
-      const img = root.querySelector('img'), progress = root.querySelector('.progress');
+      const img = root.querySelector('img.base'), ctfl = root.querySelector('img.ctfl');
+      const progress = root.querySelector('.progress'), dots = root.querySelector('.dots');
       let dark = false;
       try {
         // 跟 App 里选的外观走（shared_preferences 在网页存在 localStorage，键带「flutter.」前缀）。
@@ -129,7 +144,10 @@
         dark = mode.includes('dark') || (!mode.includes('light') && matchMedia('(prefers-color-scheme: dark)').matches);
       } catch (_) {}
       if (dark) root.classList.add('dark');
-      // 书组 + App 名的图：Flutter 启动页第一帧的截图；位置照 brand_lockup.dart 的 BrandLaunchLayout 算。
+      // 书组 + App 名的图：Flutter 启动页第一帧的截图，最右的 CTFL 抠成单独一张（boot/ctfl*.png，带透明），其余是 boot/base*.png；
+      // 位置照 brand_lockup.dart 的 BrandLaunchLayout 算。CTFL 图在原图里的框和转轴（书的左下角）按原图像素写在这里。
+      const sprite = { phone: { w: 690, x: 410, y: 12, cw: 94, ch: 243, px: 12, py: 228 },
+                       pad: { w: 1200, x: 704, y: 12, cw: 152, ch: 390, px: 20, py: 367 } };
       let wide = null;
       function place() {
         const w = innerWidth, h = innerHeight, isWide = w >= 874;
@@ -146,10 +164,18 @@
         if (isWide !== wide) {
           wide = isWide;
           root.classList.toggle('wide', isWide);
-          img.src = 'boot/mark' + (isWide ? '-pad' : '') + (dark ? '-dark' : '') + '.png';
+          const suffix = (isWide ? '-pad' : '') + (dark ? '-dark' : '') + '.png';
+          img.src = 'boot/base' + suffix;
+          ctfl.src = 'boot/ctfl' + suffix;
         }
-        Object.assign(img.style, { width: iw + 'px', height: ih + 'px', left: (w - iw) / 2 + 'px', top: cy - ih / 2 + 'px' });
-        progress.style.top = cy + ih / 2 + 16 * (isWide ? Math.min(1, w / 1180, h / 820) : 1) + 'px';
+        const left = (w - iw) / 2, top = cy - ih / 2;
+        Object.assign(img.style, { width: iw + 'px', height: ih + 'px', left: left + 'px', top: top + 'px' });
+        const sp = isWide ? sprite.pad : sprite.phone, s = iw / sp.w;
+        Object.assign(ctfl.style, { width: sp.cw * s + 'px', height: sp.ch * s + 'px', left: left + sp.x * s + 'px', top: top + sp.y * s + 'px',
+          transformOrigin: sp.px * s + 'px ' + sp.py * s + 'px' });
+        const below = cy + ih / 2 + 16 * (isWide ? Math.min(1, w / 1180, h / 820) : 1);
+        progress.style.top = below + 'px';
+        dots.style.top = below + 8 + 'px';
       }
       place();
       addEventListener('resize', place);
@@ -162,7 +188,26 @@
       // 0.5 秒还没出来（网慢、等 Firebase 等外部脚本）就把书组画回来，不留一整屏空白（pika 10-31「刷新后白了10几秒」）。
       if (isReload && seenStamp) {
         root.classList.add('quiet');
-        setTimeout(() => root.classList.remove('quiet'), 500);
+        setTimeout(() => {
+          root.classList.remove('quiet');
+          // 同一版刷新出来后回到原页面，不经启动页：这里替它放 CTFL 倒下（同 brand_mark.dart 的 BrandFall，再停 0.3 秒起步）。
+          if (!closing && !root.classList.contains('loading')) setTimeout(fall, 300);
+        }, 500);
+      }
+      // 普通打开之后还会放 Flutter 启动页的倒下，这里不放，免得书倒了又站起来再倒。
+      setTimeout(() => { if (!closing) root.classList.add('waiting'); }, 2000);
+      function fall() {
+        if (closing || !ctfl.animate) return;
+        // 越倒越快到 −9°（0.55 秒），回弹到 −5.5° 再落回，小余弹到 −8° 再落回，停在 −9°；共 1.14 秒。
+        const at = (deg, ms, easing) => ({ transform: 'rotate(' + deg + 'deg)', offset: ms / 1140, easing });
+        ctfl.animate([
+          at(0, 0, 'cubic-bezier(.5, 0, .9, .4)'),
+          at(-9, 550, 'cubic-bezier(.2, .6, .4, 1)'),
+          at(-5.5, 750, 'cubic-bezier(.5, 0, .9, .5)'),
+          at(-9, 920, 'cubic-bezier(.2, .6, .4, 1)'),
+          at(-8, 1040, 'cubic-bezier(.5, 0, .9, .5)'),
+          at(-9, 1140, 'linear'),
+        ], { duration: 1140, fill: 'forwards' });
       }
       function show() {
         if (!total) return;

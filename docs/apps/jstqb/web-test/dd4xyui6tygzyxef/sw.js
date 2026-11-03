@@ -8,6 +8,8 @@
 // 本地把 www.gstatic.com 或 fonts.gstatic.com 拖慢 6 秒，刷新就多等 6 秒）。
 
 const prefix = 'jstqb-app-';
+// v2-：11-03 起本版缓存只存带版本记号取来的文件；名字换一下，旧 sw.js 在交接那一次可能存进去的混版缓存一律作废。
+const generation = 'v2-';
 const externalCache = 'jstqb-ext-1';
 const neverCache = ['boot_sizes.json', 'flutter_bootstrap.js', 'sw.js', 'index.html'];
 let stamp = null;
@@ -22,7 +24,7 @@ async function refreshStamp() {
     if (!res.ok) throw new Error(String(res.status));
     const value = (await res.json()).stamp;
     if (typeof value !== 'string' || !value) throw new Error('没有 stamp');
-    const keep = prefix + value;
+    const keep = prefix + generation + value;
     for (const name of await caches.keys()) {
       if (name.startsWith(prefix) && name !== keep) await caches.delete(name);
     }
@@ -83,11 +85,21 @@ self.addEventListener('fetch', (event) => {
     // SW 被浏览器停过又唤醒时 stamp 会丢：重新读一次。
     if (!stamp) stamp = await refreshStamp();
     if (!stamp) return fetch(request);
-    const cache = await caches.open(prefix + stamp);
+    const cache = await caches.open(prefix + generation + stamp);
     const hit = await cache.match(request, { ignoreSearch: ignoreQuery.includes(pathOf(request)) });
     if (hit) return hit;
-    const res = await fetch(request);
+    const res = await fetchFresh(request, stamp);
     if (res.ok && res.type === 'basic') cache.put(request, res.clone()).catch(() => {});
     return res;
   })());
 });
+
+// 存进本版缓存的文件必须是本版的：网址带上版本记号、并跟服务器核对，不拿浏览器或 CDN 手里的旧版。
+// 以前直接 fetch(request)：刚发版的 10 分钟内（GitHub Pages 和 Cloudflare 都按 max-age=600 缓存）会拿到上一版的
+// main.dart.js 或 app.json，和新版的其他文件混在一起存进新版缓存，之后每次刷新都从缓存取这份混版。
+// 11-03 app.json 改了格式（syllabusAbout 换成 points），新旧对不上，启动读配置就出错，加载页一直停在 99%。
+function fetchFresh(request, value) {
+  const url = new URL(request.url);
+  url.searchParams.set('b', value);
+  return fetch(url.href, { cache: 'no-cache', credentials: 'same-origin' });
+}

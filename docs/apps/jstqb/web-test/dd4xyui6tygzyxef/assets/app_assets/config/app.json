@@ -8,7 +8,7 @@
     },
     "tagline": "読む・解く・試す",
     "appStoreID": "6811751328",
-    "playStoreID": "me.pikacode.jstqb.android",
+    "playStoreID": "ai.angelheart.jstqb",
     "playStoreLive": false,
     "supportEmail": "support@angelheart.ai",
     "links": {
@@ -28,8 +28,13 @@
       "試験の申込みや最新の情報は、JSTQB公式サイトでご確認ください。"
     ],
     "syllabusAbout": {
-      "intro": "JSTQBシラバスの学習目標をもとに、試験に出るところを読みやすく書き下ろした解説です。",
-      "disclaimer": "JSTQB・ISTQBの公式教材ではありません。個人が開発した非公式アプリです。"
+      "points": [
+        "JSTQB公式の教材ではありません。",
+        "知識の範囲は公式と同じです。",
+        "公式シラバスを読みやすくした解説です。",
+        "各節の最後に試験の要点があります。",
+        "問題も公式の内容をもとに作っています。"
+      ]
     },
     "markPractice": {
       "text": "テストは欠陥があることは示せるが、欠陥がないことは示せない。",
@@ -341,9 +346,10 @@
   "firebase": {
     "android": {
       "apiKey": "AIzaSyDBR8Edsi1tVEkQZeHY1Hmf7OYQ1N0_ZHU",
-      "appId": "1:23389998110:android:22c7d6c20a62032071320f",
+      "appId": "1:23389998110:android:f840e80b0a33b22e71320f",
       "messagingSenderId": "23389998110",
       "projectId": "pikacode-jstqb",
+      "authDomain": "angelheart.ai",
       "storageBucket": "pikacode-jstqb.firebasestorage.app"
     },
     "web": {
@@ -351,7 +357,7 @@
       "appId": "1:23389998110:ios:427448e4b92ea92d71320f",
       "messagingSenderId": "23389998110",
       "projectId": "pikacode-jstqb",
-      "authDomain": "pikacode-jstqb.firebaseapp.com",
+      "authDomain": "angelheart.ai",
       "storageBucket": "pikacode-jstqb.firebasestorage.app"
     }
   },
