@@ -20,7 +20,12 @@ self.addEventListener('activate', (event) => event.waitUntil(self.clients.claim(
 /** 从网上读本版记号；读到了且和缓存的不同，删掉别的版本的缓存。读不到返回 null。 */
 async function refreshStamp() {
   try {
-    const res = await fetch(new URL('boot_sizes.json', self.registration.scope), { cache: 'no-store' });
+    // 最多等 5 秒：这个请求挂住不回时，页面要的每个文件都在等它，加载页就停住不动（pika 11-04「偶发卡在 99%」）。
+    // 超时当读不到：这次不用缓存，全部照常走网络。
+    const abort = new AbortController();
+    const timer = setTimeout(() => abort.abort(), 5000);
+    const res = await fetch(new URL('boot_sizes.json', self.registration.scope), { cache: 'no-store', signal: abort.signal })
+      .finally(() => clearTimeout(timer));
     if (!res.ok) throw new Error(String(res.status));
     const value = (await res.json()).stamp;
     if (typeof value !== 'string' || !value) throw new Error('没有 stamp');
