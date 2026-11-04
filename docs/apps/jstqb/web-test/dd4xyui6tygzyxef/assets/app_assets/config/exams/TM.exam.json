@@ -30,10 +30,12 @@
     "chapterQuestionCounts": { "1": 26, "2": 15, "3": 9 }
   },
   "free": {
-    "syllabusChapters": ["3"],
-    "sampleChapters": ["1", "2"],
-    "practiceChapters": ["3"],
-    "labels": { "free": "第3章", "locked": "第1・2章" }
+    "syllabusChapters": [],
+    "sampleChapters": [],
+    "practiceChapters": [],
+    "syllabusSections": ["1.1", "1.2", "1.3", "2.1", "3.1"],
+    "practiceSections": ["1.1", "1.2", "1.3", "2.1", "3.1"],
+    "labels": { "free": "範囲", "locked": "残りの節" }
   },
   "answerTypes": ["single"]
 }
