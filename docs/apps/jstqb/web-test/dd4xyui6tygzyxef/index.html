@@ -41,7 +41,7 @@
   <script>
     (function () {
       const light = { white: [250, 250, 250], gray: [246, 246, 246], cream: [250, 247, 240], mint: [240, 246, 241], blue: [240, 244, 250] };
-      const darkShift = [230, 228, 225];
+      const darkShift = [236, 235, 233];
       let rgb = light.gray, mode = '';
       try {
         const saved = JSON.parse(localStorage.getItem('flutter.appAppearance.pageBackground') || 'null');
@@ -87,7 +87,7 @@
     html, body { margin: 0; height: 100%; background: var(--page, #F6F6F6); }
     #boot { position: fixed; inset: 0; z-index: 10; background: var(--page, #F6F6F6); color: rgba(29, 40, 51, 0.58);
       font: 15px/20px -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", Roboto, sans-serif; }
-    #boot.dark { background: var(--page, #101215); color: rgba(238, 242, 245, 0.58); }
+    #boot.dark { background: var(--page, #0A0B0D); color: rgba(238, 242, 245, 0.58); }
     /* 交接（pika 10-30）：图是 Flutter 书组的截图（窄屏 402×874 3 倍、宽屏 1180×820 4 倍，浅深各一张，书组改了要重截；底色按截图时的 #F6F6F6 / #101215 抠成透明，换了背景色也不露底，pika 11-01），同位置同像素，底色和图一起瞬间去掉看不出来，只有进度条淡出。 */
     #boot.leaving, #boot.dark.leaving { background: transparent; pointer-events: none; }
     #boot img { position: absolute; }
