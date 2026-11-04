@@ -39,6 +39,20 @@ async function refreshStamp() {
   }
 }
 
+// 同时来的请求共用一次读取；读不到后 30 秒内不再读，直接走网络：boot_sizes.json 挂住时，
+// 以前每个文件都各自再等 5 秒，几十个文件排下来加载页像停住一样（JST-350 复测）。
+let stampPending = null;
+let stampFailedAt = 0;
+function stampOnce() {
+  if (Date.now() - stampFailedAt < 30000) return Promise.resolve(null);
+  stampPending ??= refreshStamp().then((value) => {
+    if (!value) stampFailedAt = Date.now();
+    stampPending = null;
+    return value;
+  });
+  return stampPending;
+}
+
 function pathOf(request) {
   return request.url.slice(self.registration.scope.length).split('?')[0];
 }
@@ -81,15 +95,24 @@ self.addEventListener('fetch', (event) => {
     event.respondWith((async () => {
       const [page, value] = await Promise.all([fetch(request), refreshStamp()]);
       stamp = value;
+      stampFailedAt = value ? 0 : Date.now();
       return page;
     })());
     return;
   }
+  // 刚读过 boot_sizes.json 没读到（挂住或出错）：页面里 flutter_bootstrap.js 再读时马上回失败，不让它再等 5 秒（JST-350 复测）。
+  if (pathOf(request) === 'boot_sizes.json' && Date.now() - stampFailedAt < 30000) {
+    event.respondWith(new Response('', { status: 504 }));
+    return;
+  }
   if (!cacheable(request)) return;
   event.respondWith((async () => {
-    // SW 被浏览器停过又唤醒时 stamp 会丢：重新读一次。
-    if (!stamp) stamp = await refreshStamp();
-    if (!stamp) return fetch(request);
+    // 还不知道本版记号（第一次打开时 SW 中途接管、或被浏览器停过又唤醒）：这次直接走网络，后台去读，读到了之后的请求再用缓存。
+    // 不在这里等：boot_sizes.json 挂住时每个文件都要陪着等（JST-350 复测）。
+    if (!stamp) {
+      stampOnce().then((value) => { if (value && !stamp) stamp = value; });
+      return fetch(request);
+    }
     const cache = await caches.open(prefix + generation + stamp);
     const hit = await cache.match(request, { ignoreSearch: ignoreQuery.includes(pathOf(request)) });
     if (hit) return hit;
