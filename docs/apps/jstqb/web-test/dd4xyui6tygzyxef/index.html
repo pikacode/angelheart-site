@@ -43,10 +43,12 @@
       const light = { white: [250, 250, 250], gray: [246, 246, 246], cream: [250, 247, 240], mint: [240, 246, 241], blue: [240, 244, 250] };
       const darkShift = [236, 235, 233];
       let rgb = light.gray, mode = '';
+      // 设置存在 localStorage：正式版键带「flutter.」，测试版带「webtest.」（lib/data/platform/web_site.dart，JST-364）。
+      const prefs = location.pathname.includes('/web-test/') ? 'webtest.' : 'flutter.';
       try {
-        const saved = JSON.parse(localStorage.getItem('flutter.appAppearance.pageBackground') || 'null');
+        const saved = JSON.parse(localStorage.getItem(prefs + 'appAppearance.pageBackground') || 'null');
         if (light[saved]) rgb = light[saved];
-        mode = localStorage.getItem('flutter.appAppearance.themeMode') || '';
+        mode = localStorage.getItem(prefs + 'appAppearance.themeMode') || '';
       } catch (_) {}
       const followsSystem = !mode.includes('dark') && !mode.includes('light');
       const dark = mode.includes('dark') || (followsSystem && matchMedia('(prefers-color-scheme: dark)').matches);
@@ -139,8 +141,9 @@
       const progress = root.querySelector('.progress'), dots = root.querySelector('.dots');
       let dark = false;
       try {
-        // 跟 App 里选的外观走（shared_preferences 在网页存在 localStorage，键带「flutter.」前缀）。
-        const mode = localStorage.getItem('flutter.appAppearance.themeMode') || '';
+        // 跟 App 里选的外观走（shared_preferences 在网页存在 localStorage，正式版键带「flutter.」、测试版带「webtest.」前缀）。
+        const prefs = location.pathname.includes('/web-test/') ? 'webtest.' : 'flutter.';
+        const mode = localStorage.getItem(prefs + 'appAppearance.themeMode') || '';
         dark = mode.includes('dark') || (!mode.includes('light') && matchMedia('(prefers-color-scheme: dark)').matches);
       } catch (_) {}
       if (dark) root.classList.add('dark');
