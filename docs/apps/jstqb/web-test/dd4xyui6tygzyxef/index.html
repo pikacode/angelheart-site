@@ -180,7 +180,8 @@
       place();
       addEventListener('resize', place);
       let total = 0, got = 0, closing = false, stamp = null;
-      const stampKey = 'jstqbBootStamp';
+      // 测试版另用一个键，和同一网站下的正式版分开（JST-230）。
+      const stampKey = location.pathname.includes('/web-test/') ? 'jstqbBootStamp-test' : 'jstqbBootStamp';
       let seenStamp = null;
       try { seenStamp = localStorage.getItem(stampKey); } catch (_) {}
       const isReload = performance.getEntriesByType('navigation')[0]?.type === 'reload';

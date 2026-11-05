@@ -7,7 +7,11 @@
 // 它们的地址带版本号、内容不会变；不存的话刷新时 Google 一慢，加载页就停多久（pika 10-31「刷新在 logo 页停了 10 来秒」，
 // 本地把 www.gstatic.com 或 fonts.gstatic.com 拖慢 6 秒，刷新就多等 6 秒）。
 
-const prefix = 'jstqb-app-';
+// 缓存名带本页的路径：网页正式版（/apps/jstqb/web/）和测试版（/apps/jstqb/web-test/…/）在同一个网站下，浏览器缓存按网站共用，
+// 不带路径的话两边每次打开都把对方的缓存当旧版删掉（JST-230，11-05）。
+const prefix = 'jstqb-app-' + new URL(self.registration.scope).pathname + '-';
+// 11-05 以前的缓存名不带路径（jstqb-app-v2-<stamp>），见到就删。
+const legacy = /^jstqb-app-v\d+-/;
 // v2-：11-03 起本版缓存只存带版本记号取来的文件；名字换一下，旧 sw.js 在交接那一次可能存进去的混版缓存一律作废。
 const generation = 'v2-';
 const externalCache = 'jstqb-ext-1';
@@ -31,7 +35,7 @@ async function refreshStamp() {
     if (typeof value !== 'string' || !value) throw new Error('没有 stamp');
     const keep = prefix + generation + value;
     for (const name of await caches.keys()) {
-      if (name.startsWith(prefix) && name !== keep) await caches.delete(name);
+      if ((name.startsWith(prefix) && name !== keep) || legacy.test(name)) await caches.delete(name);
     }
     return value;
   } catch (_) {
