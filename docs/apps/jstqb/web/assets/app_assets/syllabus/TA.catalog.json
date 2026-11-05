@@ -1,0 +1,95 @@
+{
+  "id": "ta-v4.0.j01",
+  "examName": "CTAL-TA",
+  "version": "Version 4.0.J01",
+  "resourceName": "TA/Version4.0.J01",
+  "chapters": [
+    {
+      "id": "chapter-0",
+      "number": "0",
+      "title": "イントロダクション",
+      "categoryTitle": null,
+      "pageStart": 8,
+      "pageEnd": 12,
+      "sections": [
+        { "id": "section-0.1", "number": "0.1", "title": "本シラバスの目的", "pageStart": 8, "pageEnd": 8 },
+        { "id": "section-0.2", "number": "0.2", "title": "テスト技術者資格制度Advanced Level Test Analyst", "pageStart": 8, "pageEnd": 8 },
+        { "id": "section-0.3", "number": "0.3", "title": "テスト担当者のキャリアパス", "pageStart": 8, "pageEnd": 9 },
+        { "id": "section-0.4", "number": "0.4", "title": "ビジネス成果", "pageStart": 10, "pageEnd": 10 },
+        { "id": "section-0.5", "number": "0.5", "title": "学習の目的と知識レベル", "pageStart": 10, "pageEnd": 10 },
+        { "id": "section-0.6", "number": "0.6", "title": "Advanced Level Test Analystの資格認定試験", "pageStart": 10, "pageEnd": 11 },
+        { "id": "section-0.7", "number": "0.7", "title": "認定審査", "pageStart": 11, "pageEnd": 11 },
+        { "id": "section-0.8", "number": "0.8", "title": "標準の取り扱い", "pageStart": 11, "pageEnd": 11 },
+        { "id": "section-0.9", "number": "0.9", "title": "詳細レベル", "pageStart": 11, "pageEnd": 12 },
+        { "id": "section-0.10", "number": "0.10", "title": "本シラバスの構成", "pageStart": 12, "pageEnd": 12 }
+      ]
+    },
+    {
+      "id": "chapter-1",
+      "number": "1",
+      "title": "テストプロセスにおけるテストアナリストのタスク",
+      "categoryTitle": null,
+      "pageStart": 13,
+      "pageEnd": 22,
+      "sections": [
+        { "id": "section-1.1", "number": "1.1", "title": "ソフトウェア開発ライフサイクルにおけるテスト", "pageStart": 14, "pageEnd": 14 },
+        { "id": "section-1.2", "number": "1.2", "title": "テスト活動への関与", "pageStart": 14, "pageEnd": 16 },
+        { "id": "section-1.3", "number": "1.3", "title": "作業成果物に関するタスク", "pageStart": 17, "pageEnd": 22 }
+      ]
+    },
+    {
+      "id": "chapter-2",
+      "number": "2",
+      "title": "リスクベースドテストにおけるテストアナリストのタスク",
+      "categoryTitle": null,
+      "pageStart": 23,
+      "pageEnd": 26,
+      "sections": [
+        { "id": "section-2.1", "number": "2.1", "title": "リスク分析", "pageStart": 24, "pageEnd": 24 },
+        { "id": "section-2.2", "number": "2.2", "title": "リスクコントロール", "pageStart": 25, "pageEnd": 26 }
+      ]
+    },
+    {
+      "id": "chapter-3",
+      "number": "3",
+      "title": "テスト分析とテスト設計",
+      "categoryTitle": null,
+      "pageStart": 27,
+      "pageEnd": 39,
+      "sections": [
+        { "id": "section-3.1", "number": "3.1", "title": "データに基づくテスト技法", "pageStart": 28, "pageEnd": 29 },
+        { "id": "section-3.2", "number": "3.2", "title": "振る舞いに基づくテスト技法", "pageStart": 30, "pageEnd": 32 },
+        { "id": "section-3.3", "number": "3.3", "title": "ルールに基づくテスト技法", "pageStart": 33, "pageEnd": 34 },
+        { "id": "section-3.4", "number": "3.4", "title": "経験ベースのテスト", "pageStart": 35, "pageEnd": 36 },
+        { "id": "section-3.5", "number": "3.5", "title": "最も適切なテスト技法の適用", "pageStart": 37, "pageEnd": 39 }
+      ]
+    },
+    {
+      "id": "chapter-4",
+      "number": "4",
+      "title": "品質特性のテスト",
+      "categoryTitle": null,
+      "pageStart": 40,
+      "pageEnd": 44,
+      "sections": [
+        { "id": "section-4.1", "number": "4.1", "title": "機能テスト", "pageStart": 41, "pageEnd": 41 },
+        { "id": "section-4.2", "number": "4.2", "title": "使用性テスト", "pageStart": 42, "pageEnd": 42 },
+        { "id": "section-4.3", "number": "4.3", "title": "柔軟性テスト", "pageStart": 43, "pageEnd": 43 },
+        { "id": "section-4.4", "number": "4.4", "title": "互換性テスト", "pageStart": 43, "pageEnd": 44 }
+      ]
+    },
+    {
+      "id": "chapter-5",
+      "number": "5",
+      "title": "ソフトウェア欠陥予防",
+      "categoryTitle": null,
+      "pageStart": 45,
+      "pageEnd": 51,
+      "sections": [
+        { "id": "section-5.1", "number": "5.1", "title": "欠陥予防の実践", "pageStart": 46, "pageEnd": 46 },
+        { "id": "section-5.2", "number": "5.2", "title": "フェーズ内封じ込めの支援", "pageStart": 47, "pageEnd": 48 },
+        { "id": "section-5.3", "number": "5.3", "title": "類似欠陥の再発の軽減", "pageStart": 49, "pageEnd": 51 }
+      ]
+    }
+  ]
+}

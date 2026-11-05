@@ -1,0 +1,114 @@
+{
+  "id": "tm-custom-2.0",
+  "examName": "CTAL-TM",
+  "version": "2.0",
+  "language": "ja",
+  "resourceName": "TM-Custom/Version2.0",
+  "status": "2.0定稿：全3章11節（原版为唯一来源，逐节审核＋Fable终审定稿）",
+  "chapters": [
+    {
+      "id": "custom-chapter-1",
+      "number": "1",
+      "title": "テスト活動のマネジメント",
+      "pageStart": 17,
+      "pageEnd": 48,
+      "sections": [
+        {
+          "id": "custom-section-1.1",
+          "number": "1.1",
+          "title": "テストマネジメントの3つの主要活動",
+          "pageStart": 19,
+          "pageEnd": 21
+        },
+        {
+          "id": "custom-section-1.2",
+          "number": "1.2",
+          "title": "コンテキスト別のテストマネジメント",
+          "pageStart": 22,
+          "pageEnd": 28
+        },
+        {
+          "id": "custom-section-1.3",
+          "number": "1.3",
+          "title": "リスクベースドテストの進め方と課題",
+          "pageStart": 29,
+          "pageEnd": 34
+        },
+        {
+          "id": "custom-section-1.4",
+          "number": "1.4",
+          "title": "テストアプローチの選び方とテスト目的",
+          "pageStart": 35,
+          "pageEnd": 38
+        },
+        {
+          "id": "custom-section-1.5",
+          "number": "1.5",
+          "title": "テストプロセス改善の手順とアプローチ",
+          "pageStart": 39,
+          "pageEnd": 43
+        },
+        {
+          "id": "custom-section-1.6",
+          "number": "1.6",
+          "title": "テストツールの選定・導入・運用",
+          "pageStart": 44,
+          "pageEnd": 48
+        }
+      ]
+    },
+    {
+      "id": "custom-chapter-2",
+      "number": "2",
+      "title": "プロダクトのマネジメント",
+      "pageStart": 49,
+      "pageEnd": 64,
+      "sections": [
+        {
+          "id": "custom-section-2.1",
+          "number": "2.1",
+          "title": "テストメトリクスの活用と報告",
+          "pageStart": 50,
+          "pageEnd": 53
+        },
+        {
+          "id": "custom-section-2.2",
+          "number": "2.2",
+          "title": "テスト見積りの要因と技法の選び方",
+          "pageStart": 54,
+          "pageEnd": 57
+        },
+        {
+          "id": "custom-section-2.3",
+          "number": "2.3",
+          "title": "欠陥マネジメントのプロセスとデータ活用",
+          "pageStart": 58,
+          "pageEnd": 64
+        }
+      ]
+    },
+    {
+      "id": "custom-chapter-3",
+      "number": "3",
+      "title": "チームのマネジメント",
+      "pageStart": 65,
+      "pageEnd": 74,
+      "sections": [
+        {
+          "id": "custom-section-3.1",
+          "number": "3.1",
+          "title": "テストチームのスキルとモチベーション",
+          "pageStart": 66,
+          "pageEnd": 71
+        },
+        {
+          "id": "custom-section-3.2",
+          "number": "3.2",
+          "title": "品質コストで示すテストの付加価値",
+          "pageStart": 72,
+          "pageEnd": 74
+        }
+      ]
+    }
+  ]
+}

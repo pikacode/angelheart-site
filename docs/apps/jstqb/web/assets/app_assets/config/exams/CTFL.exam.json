@@ -1,0 +1,39 @@
+{
+  "id": "CTFL",
+  "label": "CTFL",
+  "name": "Foundation Level",
+  "japaneseName": "基礎レベル",
+  "subtitle": "Certified Tester",
+  "purchaseSubtitle": "Certified Tester",
+  "certificationName": "Certified Tester Foundation Level",
+  "isFree": false,
+  "syllabusVersionNote": "JSTQB CTFL v4.0 シラバス対応",
+  "color": {
+    "light": ["#33A9DD", "#1690C9"],
+    "dark": ["#2AA8E0", "#0A8AC2"],
+    "buttonLight": ["#33A9DD", "#1690C9"],
+    "buttonDark": ["#0283B4", "#006899"],
+    "ink": { "light": "#1690C9", "dark": "#2AA8E0" }
+  },
+  "chapterShortNames": { "1": "基礎", "2": "ライフサイクル", "3": "静的テスト", "4": "テスト技法", "5": "マネジメント", "6": "ツール" },
+  "chapterSubtitles": { "3": "レビューと静的解析" },
+  "resources": {
+    "catalog": "Syllabus/Catalog/CTFL/Version2023V4.0.J02",
+    "syllabus": "Syllabus/CTFL-Custom/Version2.0"
+  },
+  "mockExam": {
+    "questionCount": 40,
+    "durationMinutes": 60,
+    "passingCount": 26,
+    "passRate": { "label": "2025年度", "percent": 63.72 },
+    "preparationDays": 60,
+    "chapterQuestionCounts": { "1": 8, "2": 6, "3": 4, "4": 11, "5": 9, "6": 2 }
+  },
+  "free": {
+    "syllabusChapters": ["1", "2", "3"],
+    "sampleChapters": ["4", "5", "6"],
+    "practiceChapters": ["1", "2", "3"],
+    "labels": { "free": "第1〜3章", "locked": "第4章以降" }
+  },
+  "answerTypes": ["single"]
+}

@@ -1,0 +1,218 @@
+{
+  "id": "ctfl-custom-2.0",
+  "examName": "CTFL",
+  "version": "2.0",
+  "language": "ja",
+  "resourceName": "CTFL-Custom/Version2.0",
+  "status": "2.0草稿：全6章22節（原版为唯一来源，逐节审核＋Fable终审定稿）",
+  "chapters": [
+    {
+      "id": "custom-chapter-1",
+      "number": "1",
+      "title": "テストの基礎",
+      "pageStart": 15,
+      "pageEnd": 24,
+      "sections": [
+        {
+          "id": "custom-section-1.1",
+          "number": "1.1",
+          "title": "テスト目的とデバッグとの違い",
+          "pageStart": 16,
+          "pageEnd": 17
+        },
+        {
+          "id": "custom-section-1.2",
+          "number": "1.2",
+          "title": "テストの必要性とQA、エラーと根本原因",
+          "pageStart": 17,
+          "pageEnd": 18
+        },
+        {
+          "id": "custom-section-1.3",
+          "number": "1.3",
+          "title": "テストの7原則と使いどころ",
+          "pageStart": 18,
+          "pageEnd": 19
+        },
+        {
+          "id": "custom-section-1.4",
+          "number": "1.4",
+          "title": "テストプロセスの構成と2つの役割",
+          "pageStart": 19,
+          "pageEnd": 22
+        },
+        {
+          "id": "custom-section-1.5",
+          "number": "1.5",
+          "title": "テスト担当者のスキルと独立性",
+          "pageStart": 22,
+          "pageEnd": 24
+        }
+      ]
+    },
+    {
+      "id": "custom-chapter-2",
+      "number": "2",
+      "title": "ソフトウェア開発ライフサイクル全体を通してのテスト",
+      "pageStart": 25,
+      "pageEnd": 32,
+      "sections": [
+        {
+          "id": "custom-section-2.1",
+          "number": "2.1",
+          "title": "SDLCの選択とテストの進め方",
+          "pageStart": 26,
+          "pageEnd": 29
+        },
+        {
+          "id": "custom-section-2.2",
+          "number": "2.2",
+          "title": "5つのテストレベルと4つのテストタイプ",
+          "pageStart": 29,
+          "pageEnd": 31
+        },
+        {
+          "id": "custom-section-2.3",
+          "number": "2.3",
+          "title": "メンテナンステストの範囲ときっかけ",
+          "pageStart": 31,
+          "pageEnd": 32
+        }
+      ]
+    },
+    {
+      "id": "custom-chapter-3",
+      "number": "3",
+      "title": "静的テスト",
+      "pageStart": 33,
+      "pageEnd": 37,
+      "sections": [
+        {
+          "id": "custom-section-3.1",
+          "number": "3.1",
+          "title": "静的テストの価値と動的テストとの違い",
+          "pageStart": 34,
+          "pageEnd": 35
+        },
+        {
+          "id": "custom-section-3.2",
+          "number": "3.2",
+          "title": "早期フィードバックとレビューの進め方",
+          "pageStart": 35,
+          "pageEnd": 37
+        }
+      ]
+    },
+    {
+      "id": "custom-chapter-4",
+      "number": "4",
+      "title": "テスト分析と設計",
+      "pageStart": 38,
+      "pageEnd": 47,
+      "sections": [
+        {
+          "id": "custom-section-4.1",
+          "number": "4.1",
+          "title": "テスト技法の3つの分類",
+          "pageStart": 39,
+          "pageEnd": 39
+        },
+        {
+          "id": "custom-section-4.2",
+          "number": "4.2",
+          "title": "4つのブラックボックステスト技法",
+          "pageStart": 39,
+          "pageEnd": 42
+        },
+        {
+          "id": "custom-section-4.3",
+          "number": "4.3",
+          "title": "ステートメントテストとブランチテスト",
+          "pageStart": 42,
+          "pageEnd": 43
+        },
+        {
+          "id": "custom-section-4.4",
+          "number": "4.4",
+          "title": "3つの経験ベースのテスト技法",
+          "pageStart": 43,
+          "pageEnd": 45
+        },
+        {
+          "id": "custom-section-4.5",
+          "number": "4.5",
+          "title": "共同で書くユーザーストーリーとATDD",
+          "pageStart": 45,
+          "pageEnd": 47
+        }
+      ]
+    },
+    {
+      "id": "custom-chapter-5",
+      "number": "5",
+      "title": "テスト活動のマネジメント",
+      "pageStart": 48,
+      "pageEnd": 58,
+      "sections": [
+        {
+          "id": "custom-section-5.1",
+          "number": "5.1",
+          "title": "テスト計画書・見積り・優先順位付け",
+          "pageStart": 49,
+          "pageEnd": 52
+        },
+        {
+          "id": "custom-section-5.2",
+          "number": "5.2",
+          "title": "リスクの種類・分析・コントロール",
+          "pageStart": 52,
+          "pageEnd": 54
+        },
+        {
+          "id": "custom-section-5.3",
+          "number": "5.3",
+          "title": "テストモニタリングとテストレポート",
+          "pageStart": 54,
+          "pageEnd": 56
+        },
+        {
+          "id": "custom-section-5.4",
+          "number": "5.4",
+          "title": "構成管理とベースライン",
+          "pageStart": 56,
+          "pageEnd": 57
+        },
+        {
+          "id": "custom-section-5.5",
+          "number": "5.5",
+          "title": "欠陥マネジメントと欠陥レポート",
+          "pageStart": 57,
+          "pageEnd": 58
+        }
+      ]
+    },
+    {
+      "id": "custom-chapter-6",
+      "number": "6",
+      "title": "テストツール",
+      "pageStart": 59,
+      "pageEnd": 61,
+      "sections": [
+        {
+          "id": "custom-section-6.1",
+          "number": "6.1",
+          "title": "テストツールの種類と支援",
+          "pageStart": 60,
+          "pageEnd": 60
+        },
+        {
+          "id": "custom-section-6.2",
+          "number": "6.2",
+          "title": "ツール導入と自動化の利点・リスク",
+          "pageStart": 60,
+          "pageEnd": 61
+        }
+      ]
+    }
+  ]
+}
