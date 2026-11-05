@@ -1,0 +1,38 @@
+{
+  "id": "TA",
+  "label": "TA",
+  "name": "Test Analyst",
+  "japaneseName": "テストアナリスト",
+  "subtitle": "Test Analyst",
+  "purchaseSubtitle": "Test Analyst",
+  "certificationName": "Certified Tester Advanced Level Test Analyst",
+  "isFree": false,
+  "syllabusVersionNote": "JSTQB CTAL-TA v4.0 シラバス対応",
+  "color": {
+    "light": ["#3CAEA8", "#398E8A"],
+    "dark": ["#3AAEA7", "#288C86"],
+    "buttonLight": ["#3CAEA8", "#398E8A"],
+    "buttonDark": ["#1F8A84", "#116F6A"],
+    "ink": { "light": "#398E8A", "dark": "#3AAEA7" }
+  },
+  "chapterShortNames": { "1": "テストプロセス", "2": "リスクベース", "3": "分析と設計", "4": "品質特性", "5": "欠陥予防" },
+  "resources": {
+    "catalog": "Syllabus/Catalog/TA/Version4.0.J01",
+    "syllabus": "Syllabus/TA-Custom/Version2.0"
+  },
+  "mockExam": {
+    "questionCount": 45,
+    "durationMinutes": 120,
+    "passingCount": 30,
+    "passRate": { "label": "2025年度", "percent": 38.61 },
+    "preparationDays": 105,
+    "chapterQuestionCounts": { "1": 8, "2": 3, "3": 22, "4": 4, "5": 8 }
+  },
+  "free": {
+    "syllabusChapters": ["1"],
+    "sampleChapters": ["2", "3", "4", "5"],
+    "practiceChapters": ["1"],
+    "labels": { "free": "第1章", "locked": "第2章以降" }
+  },
+  "answerTypes": ["single"]
+}

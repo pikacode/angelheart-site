@@ -53,7 +53,12 @@ _flutter.buildConfig = {"engineRevision":"deb287481e3ce9468f3434937ced4240a70539
   const engine = chromium ? 'canvaskit/chromium/' : 'canvaskit/';
   let known = false;
   try {
-    const sizes = await (await fetch('boot_sizes.json', { cache: 'no-store' })).json();
+    // 最多等 5 秒：挂住不回时不显示百分比，照常往下载（JST-350 复测：以前一直停在书组和三个点）。
+    const abort = new AbortController();
+    const timer = setTimeout(() => abort.abort(), 5000);
+    const sizes = await fetch('boot_sizes.json', { cache: 'no-store', signal: abort.signal })
+      .then((res) => res.json())
+      .finally(() => clearTimeout(timer));
     boot?.total(sizes.main + sizes.canvaskit[chromium ? 'chromium' : 'full'] + sizes.fonts + sizes.content);
     known = boot?.seen(sizes.stamp) ?? false;
   } catch (_) {}

@@ -7,7 +7,11 @@
 // 它们的地址带版本号、内容不会变；不存的话刷新时 Google 一慢，加载页就停多久（pika 10-31「刷新在 logo 页停了 10 来秒」，
 // 本地把 www.gstatic.com 或 fonts.gstatic.com 拖慢 6 秒，刷新就多等 6 秒）。
 
-const prefix = 'jstqb-app-';
+// 缓存名带本页的路径：网页正式版（/apps/jstqb/web/）和测试版（/apps/jstqb/web-test/…/）在同一个网站下，浏览器缓存按网站共用，
+// 不带路径的话两边每次打开都把对方的缓存当旧版删掉（JST-230，11-05）。
+const prefix = 'jstqb-app-' + new URL(self.registration.scope).pathname + '-';
+// 11-05 以前的缓存名不带路径（jstqb-app-v2-<stamp>），见到就删。
+const legacy = /^jstqb-app-v\d+-/;
 // v2-：11-03 起本版缓存只存带版本记号取来的文件；名字换一下，旧 sw.js 在交接那一次可能存进去的混版缓存一律作废。
 const generation = 'v2-';
 const externalCache = 'jstqb-ext-1';
@@ -20,18 +24,37 @@ self.addEventListener('activate', (event) => event.waitUntil(self.clients.claim(
 /** 从网上读本版记号；读到了且和缓存的不同，删掉别的版本的缓存。读不到返回 null。 */
 async function refreshStamp() {
   try {
-    const res = await fetch(new URL('boot_sizes.json', self.registration.scope), { cache: 'no-store' });
+    // 最多等 5 秒：这个请求挂住不回时，页面要的每个文件都在等它，加载页就停住不动（pika 11-04「偶发卡在 99%」）。
+    // 超时当读不到：这次不用缓存，全部照常走网络。
+    const abort = new AbortController();
+    const timer = setTimeout(() => abort.abort(), 5000);
+    const res = await fetch(new URL('boot_sizes.json', self.registration.scope), { cache: 'no-store', signal: abort.signal })
+      .finally(() => clearTimeout(timer));
     if (!res.ok) throw new Error(String(res.status));
     const value = (await res.json()).stamp;
     if (typeof value !== 'string' || !value) throw new Error('没有 stamp');
     const keep = prefix + generation + value;
     for (const name of await caches.keys()) {
-      if (name.startsWith(prefix) && name !== keep) await caches.delete(name);
+      if ((name.startsWith(prefix) && name !== keep) || legacy.test(name)) await caches.delete(name);
     }
     return value;
   } catch (_) {
     return null;
   }
+}
+
+// 同时来的请求共用一次读取；读不到后 30 秒内不再读，直接走网络：boot_sizes.json 挂住时，
+// 以前每个文件都各自再等 5 秒，几十个文件排下来加载页像停住一样（JST-350 复测）。
+let stampPending = null;
+let stampFailedAt = 0;
+function stampOnce() {
+  if (Date.now() - stampFailedAt < 30000) return Promise.resolve(null);
+  stampPending ??= refreshStamp().then((value) => {
+    if (!value) stampFailedAt = Date.now();
+    stampPending = null;
+    return value;
+  });
+  return stampPending;
 }
 
 function pathOf(request) {
@@ -76,15 +99,24 @@ self.addEventListener('fetch', (event) => {
     event.respondWith((async () => {
       const [page, value] = await Promise.all([fetch(request), refreshStamp()]);
       stamp = value;
+      stampFailedAt = value ? 0 : Date.now();
       return page;
     })());
     return;
   }
+  // 刚读过 boot_sizes.json 没读到（挂住或出错）：页面里 flutter_bootstrap.js 再读时马上回失败，不让它再等 5 秒（JST-350 复测）。
+  if (pathOf(request) === 'boot_sizes.json' && Date.now() - stampFailedAt < 30000) {
+    event.respondWith(new Response('', { status: 504 }));
+    return;
+  }
   if (!cacheable(request)) return;
   event.respondWith((async () => {
-    // SW 被浏览器停过又唤醒时 stamp 会丢：重新读一次。
-    if (!stamp) stamp = await refreshStamp();
-    if (!stamp) return fetch(request);
+    // 还不知道本版记号（第一次打开时 SW 中途接管、或被浏览器停过又唤醒）：这次直接走网络，后台去读，读到了之后的请求再用缓存。
+    // 不在这里等：boot_sizes.json 挂住时每个文件都要陪着等（JST-350 复测）。
+    if (!stamp) {
+      stampOnce().then((value) => { if (value && !stamp) stamp = value; });
+      return fetch(request);
+    }
     const cache = await caches.open(prefix + generation + stamp);
     const hit = await cache.match(request, { ignoreSearch: ignoreQuery.includes(pathOf(request)) });
     if (hit) return hit;

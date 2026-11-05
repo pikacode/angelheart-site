@@ -33,7 +33,7 @@
   <link rel="icon" type="image/png" href="favicon.png"/>
 
   <title>JSTQB対策</title>
-  <meta name="theme-color" content="#FAFAFA">
+  <meta name="theme-color" content="#F6F6F6">
   <!-- 页面底色一开页就定（pika 11-01「顶部和底部有部分背景色没切换」）：iPhone 加到主屏幕打开时，状态栏那一条在网页外面，
        iOS 只在启动时按 html 底色画一次，之后 Dart 再换（web_page_color_web.dart）也不跟着变。所以在这里先按 マイページ「外観」
        存的背景色、浅深色算好页面底，html、body、启动页、theme-color 都用它。颜色表、深色换算同 lib/state/page_background.dart，
@@ -41,12 +41,14 @@
   <script>
     (function () {
       const light = { white: [250, 250, 250], gray: [246, 246, 246], cream: [250, 247, 240], mint: [240, 246, 241], blue: [240, 244, 250] };
-      const darkShift = [230, 228, 225];
-      let rgb = light.white, mode = '';
+      const darkShift = [236, 235, 233];
+      let rgb = light.gray, mode = '';
+      // 设置存在 localStorage：正式版键带「flutter.」，测试版带「webtest.」（lib/data/platform/web_site.dart，JST-364）。
+      const prefs = location.pathname.includes('/web-test/') ? 'webtest.' : 'flutter.';
       try {
-        const saved = JSON.parse(localStorage.getItem('flutter.appAppearance.pageBackground') || 'null');
+        const saved = JSON.parse(localStorage.getItem(prefs + 'appAppearance.pageBackground') || 'null');
         if (light[saved]) rgb = light[saved];
-        mode = localStorage.getItem('flutter.appAppearance.themeMode') || '';
+        mode = localStorage.getItem(prefs + 'appAppearance.themeMode') || '';
       } catch (_) {}
       const followsSystem = !mode.includes('dark') && !mode.includes('light');
       const dark = mode.includes('dark') || (followsSystem && matchMedia('(prefers-color-scheme: dark)').matches);
@@ -84,10 +86,10 @@
        百分比是真实下载的字节数 ÷ 全部要下的（boot_sizes.json）：程序、引擎由 flutter_bootstrap.js 报，字体、シラバス由 Dart 报（题目正文不在网页包里，JST-243）
        （lib/data/platform/boot_progress*.dart），开始页或启动页第一帧画出后收起进度条，书组留在原位。 -->
   <style>
-    html, body { margin: 0; height: 100%; background: var(--page, #FAFAFA); }
-    #boot { position: fixed; inset: 0; z-index: 10; background: var(--page, #FAFAFA); color: rgba(29, 40, 51, 0.58);
+    html, body { margin: 0; height: 100%; background: var(--page, #F6F6F6); }
+    #boot { position: fixed; inset: 0; z-index: 10; background: var(--page, #F6F6F6); color: rgba(29, 40, 51, 0.58);
       font: 15px/20px -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", Roboto, sans-serif; }
-    #boot.dark { background: var(--page, #101215); color: rgba(238, 242, 245, 0.58); }
+    #boot.dark { background: var(--page, #0A0B0D); color: rgba(238, 242, 245, 0.58); }
     /* 交接（pika 10-30）：图是 Flutter 书组的截图（窄屏 402×874 3 倍、宽屏 1180×820 4 倍，浅深各一张，书组改了要重截；底色按截图时的 #F6F6F6 / #101215 抠成透明，换了背景色也不露底，pika 11-01），同位置同像素，底色和图一起瞬间去掉看不出来，只有进度条淡出。 */
     #boot.leaving, #boot.dark.leaving { background: transparent; pointer-events: none; }
     #boot img { position: absolute; }
@@ -139,8 +141,9 @@
       const progress = root.querySelector('.progress'), dots = root.querySelector('.dots');
       let dark = false;
       try {
-        // 跟 App 里选的外观走（shared_preferences 在网页存在 localStorage，键带「flutter.」前缀）。
-        const mode = localStorage.getItem('flutter.appAppearance.themeMode') || '';
+        // 跟 App 里选的外观走（shared_preferences 在网页存在 localStorage，正式版键带「flutter.」、测试版带「webtest.」前缀）。
+        const prefs = location.pathname.includes('/web-test/') ? 'webtest.' : 'flutter.';
+        const mode = localStorage.getItem(prefs + 'appAppearance.themeMode') || '';
         dark = mode.includes('dark') || (!mode.includes('light') && matchMedia('(prefers-color-scheme: dark)').matches);
       } catch (_) {}
       if (dark) root.classList.add('dark');
@@ -180,7 +183,8 @@
       place();
       addEventListener('resize', place);
       let total = 0, got = 0, closing = false, stamp = null;
-      const stampKey = 'jstqbBootStamp';
+      // 测试版另用一个键，和同一网站下的正式版分开（JST-230）。
+      const stampKey = location.pathname.includes('/web-test/') ? 'jstqbBootStamp-test' : 'jstqbBootStamp';
       let seenStamp = null;
       try { seenStamp = localStorage.getItem(stampKey); } catch (_) {}
       const isReload = performance.getEntriesByType('navigation')[0]?.type === 'reload';
