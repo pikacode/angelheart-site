@@ -12893,9 +12893,9 @@ _.d=$
 _.c=_.a=null},
 bts:function bts(a){this.a=a},
 btr:function btr(a){this.a=a},
-btt:function btt(a){this.a=a},
-btu:function btu(a,b){this.a=a
+btt:function btt(a,b){this.a=a
 this.b=b},
+btu:function btu(a){this.a=a},
 alL:function alL(a,b){this.c=a
 this.a=b},
 Nj:function Nj(a,b){this.a=a
@@ -71508,7 +71508,7 @@ Y(){return new A.as8()}}
 A.as8.prototype={
 t(a){var s=null,r="practice_question",q="exitDialog",p=this.w
 p=A.b6(new A.bF(new A.bts(this),new A.bd(!0,new A.alL(p,s),s),"\u6b21\u56de\u304b\u3089\u8868\u793a\u3057\u306a\u3044",!0,!1,p,s,s),s,s)
-return A.is(A.a([A.eg(!1,new A.btt(a),r,q,B.cX,"continue","\u7d9a\u3051\u308b"),A.eg(!1,new A.btu(this,a),r,q,B.cm,"save","\u4fdd\u5b58\u3057\u3066\u623b\u308b")],t.p),p,8,s,!1,"\u3053\u3053\u307e\u3067\u306e\u89e3\u7b54\u3092\u4fdd\u5b58\u3057\u307e\u3059\u3002\n\u6b21\u56de\u306f\u300c\u7d9a\u304d\u304b\u3089\u300d\u3067\u518d\u958b\u3067\u304d\u307e\u3059\u3002",!1,"\u4fdd\u5b58\u3057\u3066\u623b\u308a\u307e\u3059\u304b\uff1f")}}
+return A.is(A.a([A.eg(!1,new A.btt(this,a),r,q,B.cX,"save","\u4fdd\u5b58\u3057\u3066\u623b\u308b"),A.eg(!1,new A.btu(a),r,q,B.cm,"continue","\u7d9a\u3051\u308b")],t.p),p,8,s,!1,"\u3053\u3053\u307e\u3067\u306e\u89e3\u7b54\u3092\u4fdd\u5b58\u3057\u307e\u3059\u3002\n\u6b21\u56de\u306f\u300c\u7d9a\u304d\u304b\u3089\u300d\u3067\u518d\u958b\u3067\u304d\u307e\u3059\u3002",!1,"\u4fdd\u5b58\u3057\u3066\u623b\u308a\u307e\u3059\u304b\uff1f")}}
 A.bts.prototype={
 $0(){var s=this.a
 s.gA().n($.a9(),t.E).jx("practice_question","exitDialog","noRemind",!s.w)
@@ -71519,13 +71519,13 @@ $0(){var s=this.a
 return s.w=!s.w},
 $S:0}
 A.btt.prototype={
-$0(){return A.b8(this.a,!1).e3(!1)},
-$S:0}
-A.btu.prototype={
 $0(){var s=this.a,r=s.gA()
 r.n($.bp(),t.u).aN("practice.exit-save-prompt.suppressed",s.w)
 if(s.w)r.n($.a9(),t.E).kh("exit_prompt",!1)
 A.b8(this.b,!1).e3(!0)},
+$S:0}
+A.btu.prototype={
+$0(){return A.b8(this.a,!1).e3(!1)},
 $S:0}
 A.alL.prototype={
 t(a){var s,r=null,q=a.C(t.M).f,p=this.c,o=p?q.f.gbw():r
@@ -81032,7 +81032,7 @@ if(d)B.b.D(o,A.a([B.dN,A.bg(m,m,B.p,m,m,B.Wf,m,7,m,m,m,m,m,7),B.dN,A.I("\u30a2\u
 o=A.aj(o,B.q,m,B.cQ,B.i,m)
 if(d)j+="\u3001\u30a2\u30c3\u30d7\u30c7\u30fc\u30c8\u304c\u3042\u308a\u307e\u3059"
 n=new A.W(B.y0,A.av(m,m,new A.bF(new A.aRL(b,c),new A.dj(B.w_,o,m),m,d,!0,m,m,m),!1,m,m,!0,!1,m,m,m,m,m,m,m,m,m,m,j,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m),m)
-return A.a3(A.a([n,A.I("\u203b 3b7424e1 \xb7 20261106_0907",m,m,m,m,m,A.E(s===B.e?B.N:B.M,m,12,B.n),m,m)],p),B.q,B.f,B.T,B.m)}}
+return A.a3(A.a([n,A.I("\u203b d02aedbd \xb7 20261106_2156",m,m,m,m,m,A.E(s===B.e?B.N:B.M,m,12,B.n),m,m)],p),B.q,B.f,B.T,B.m)}}
 A.aRM.prototype={
 $3(a,b,c){return this.a.a2T(a,this.b,this.c,b===B.vp)},
 $S:458}
@@ -153949,7 +153949,7 @@ B.U8=new A.yf(null,null,null,null,null,null,null,null,null,null,null,null,null,n
 B.p4=new A.Lt(0,"exit")
 B.vm=new A.Lt(1,"cancel")
 B.p5=new A.lJ("\u30af\u30e9\u30b7\u30c3\u30af",null,0,"classic")
-B.vn=new A.yg("1.2.0","1","2611060907")
+B.vn=new A.yg("1.2.1","1","2611062156")
 B.fh=new A.nJ(0,"detached")
 B.cy=new A.nJ(1,"resumed")
 B.kY=new A.nJ(2,"inactive")
