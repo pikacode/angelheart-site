@@ -90,7 +90,7 @@
     #boot { position: fixed; inset: 0; z-index: 10; background: var(--page, #F6F6F6); color: rgba(29, 40, 51, 0.58);
       font: 15px/20px -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", Roboto, sans-serif; }
     #boot.dark { background: var(--page, #0A0B0D); color: rgba(238, 242, 245, 0.58); }
-    /* 交接（pika 10-30）：图是 Flutter 宽屏书组的截图（1180×820 4 倍，网页只用宽屏，JST-388；浅深各一张，书组改了要重截；底色按截图时的 #F6F6F6 / #101215 抠成透明，换了背景色也不露底，pika 11-01），同位置同像素，底色和图一起瞬间去掉看不出来，只有进度条淡出。 */
+    /* 交接（pika 10-30）：图是 Flutter 书组的截图（窄屏 402×874 3 倍、宽屏 1180×820 4 倍，浅深各一张，书组改了要重截；底色按截图时的 #F6F6F6 / #101215 抠成透明，换了背景色也不露底，pika 11-01），同位置同像素，底色和图一起瞬间去掉看不出来，只有进度条淡出。 */
     #boot.leaving, #boot.dark.leaving { background: transparent; pointer-events: none; }
     #boot img { position: absolute; }
     #boot .progress { position: absolute; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; transition: opacity .2s linear; }
@@ -149,25 +149,34 @@
       if (dark) root.classList.add('dark');
       // 书组 + App 名的图：Flutter 启动页第一帧的截图，最右的 CTFL 抠成单独一张（boot/ctfl*.png，带透明），其余是 boot/base*.png；
       // 位置照 brand_lockup.dart 的 BrandLaunchLayout 算。CTFL 图在原图里的框和转轴（书的左下角）按原图像素写在这里。
-      // 网页一律走宽屏页面（JST-388，pika 11-07「只显示宽屏样式」），这里也一律用宽屏的书组和进度条。
-      // 比 1080 窄的窗口 Flutter 按 1080 宽排再整屏缩小，算下来书组的缩放仍是 min(1, 宽÷1180, 高÷820)，和电脑宽窗口同一个式子。
-      const sprite = { w: 1200, x: 704, y: 12, cw: 152, ch: 390, px: 20, py: 367 };
-      root.classList.add('wide');
-      const suffix = '-pad' + (dark ? '-dark' : '') + '.png';
-      img.src = 'boot/base' + suffix;
-      ctfl.src = 'boot/ctfl' + suffix;
+      const sprite = { phone: { w: 690, x: 410, y: 12, cw: 94, ch: 243, px: 12, py: 228 },
+                       pad: { w: 1200, x: 704, y: 12, cw: 152, ch: 390, px: 20, py: 367 } };
+      let wide = null;
       function place() {
-        const w = innerWidth, h = innerHeight;
-        // 1180×820 画板按 min(1, 宽÷1180, 高÷820) 缩放、竖向居中；图中心在画板 271.5。
-        const k = Math.min(1, w / 1180, h / 820);
-        const iw = 300 * k, ih = 162 * k, cy = (h - 820 * k) / 2 + 271.5 * k;
-        root.style.setProperty('--k', k);
+        const w = innerWidth, h = innerHeight, isWide = w >= 874;
+        let cy, iw, ih;
+        if (isWide) {
+          // 宽屏：1180×820 画板按 min(1, 宽÷1180, 高÷820) 缩放、竖向居中；图中心在画板 271.5。
+          const k = Math.min(1, w / 1180, h / 820);
+          iw = 300 * k; ih = 162 * k; cy = (h - 820 * k) / 2 + 271.5 * k;
+          root.style.setProperty('--k', k);
+        } else {
+          // 窄屏：图 230×140，中心在高的 324/874（同 iOS 启动页 centerY × 0.7414）。
+          iw = 230; ih = 140; cy = h * 324 / 874;
+        }
+        if (isWide !== wide) {
+          wide = isWide;
+          root.classList.toggle('wide', isWide);
+          const suffix = (isWide ? '-pad' : '') + (dark ? '-dark' : '') + '.png';
+          img.src = 'boot/base' + suffix;
+          ctfl.src = 'boot/ctfl' + suffix;
+        }
         const left = (w - iw) / 2, top = cy - ih / 2;
         Object.assign(img.style, { width: iw + 'px', height: ih + 'px', left: left + 'px', top: top + 'px' });
-        const s = iw / sprite.w;
-        Object.assign(ctfl.style, { width: sprite.cw * s + 'px', height: sprite.ch * s + 'px', left: left + sprite.x * s + 'px', top: top + sprite.y * s + 'px',
-          transformOrigin: sprite.px * s + 'px ' + sprite.py * s + 'px' });
-        const below = cy + ih / 2 + 16 * k;
+        const sp = isWide ? sprite.pad : sprite.phone, s = iw / sp.w;
+        Object.assign(ctfl.style, { width: sp.cw * s + 'px', height: sp.ch * s + 'px', left: left + sp.x * s + 'px', top: top + sp.y * s + 'px',
+          transformOrigin: sp.px * s + 'px ' + sp.py * s + 'px' });
+        const below = cy + ih / 2 + 16 * (isWide ? Math.min(1, w / 1180, h / 820) : 1);
         progress.style.top = below + 'px';
         dots.style.top = below + 8 + 'px';
       }
