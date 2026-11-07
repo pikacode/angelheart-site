@@ -364,6 +364,33 @@
       "storageBucket": "pikacode-jstqb.firebasestorage.app"
     }
   },
+  "firebaseDev": {
+    "ios": {
+      "apiKey": "AIzaSyDpm-iylFHyWPdK6Q7lfP_iNGRcSl1dt4o",
+      "appId": "1:572734184295:ios:4f9dc6dd79a0affdb46dc2",
+      "messagingSenderId": "572734184295",
+      "projectId": "pikacode-jstqb-dev",
+      "storageBucket": "pikacode-jstqb-dev.firebasestorage.app",
+      "iosBundleId": "me.pikacode.jstqbios",
+      "iosClientId": "572734184295-km5gtamtfk6u5u67q4m0dv9quahv8plk.apps.googleusercontent.com"
+    },
+    "android": {
+      "apiKey": "AIzaSyBl58BnC71KAdkBIRIOswherr-YdVHBEck",
+      "appId": "1:572734184295:android:fb5a61aa8affe39bb46dc2",
+      "messagingSenderId": "572734184295",
+      "projectId": "pikacode-jstqb-dev",
+      "authDomain": "pikacode-jstqb-dev.firebaseapp.com",
+      "storageBucket": "pikacode-jstqb-dev.firebasestorage.app"
+    },
+    "web": {
+      "apiKey": "AIzaSyCQYUzbzflqYVdEKUdREMNT5ducXsDwP1A",
+      "appId": "1:572734184295:web:40ee9899c1a6a3abb46dc2",
+      "messagingSenderId": "572734184295",
+      "projectId": "pikacode-jstqb-dev",
+      "authDomain": "pikacode-jstqb-dev.firebaseapp.com",
+      "storageBucket": "pikacode-jstqb-dev.firebasestorage.app"
+    }
+  },
   "questionApi": "https://jstqb-questions.pikacode.workers.dev",
   "revenueCat": {
     "apiKeys": {
