@@ -343,8 +343,24 @@
       }
     }
   },
+  "appIcons": [
+    {"name": "classic", "title": "クラシック"},
+    {"name": "geek", "title": "ギーク", "alternateName": "AppIcon-Night"},
+    {"name": "modern", "title": "モダン", "alternateName": "AppIcon-Sky"},
+    {"name": "simple", "title": "シンプル", "alternateName": "AppIcon-Classic"}
+  ],
+  "storeKitProducts": {
+    "jstqbios.ctfl.full": ["ctfl"],
+    "jstqbios.ta.full": ["ta"],
+    "jstqbios.tm.full": ["tm"],
+    "jstqbios.tatm.bundle": ["ta", "tm"],
+    "jstqb.ios.ctfl_ta.full": ["ctfl", "ta"],
+    "jstqb.ios.ctfl_tm.full": ["ctfl", "tm"],
+    "jstqb.ios.ctfl_ta_tm.full": ["ctfl", "ta", "tm"]
+  },
   "sync": {
-    "root": "users/{uid}"
+    "root": "users/{uid}",
+    "untaggedFeedback": true
   },
   "firebase": {
     "android": {
