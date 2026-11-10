@@ -415,24 +415,8 @@
     }
   },
   "whatsNew": {
-    "version": "1.2.0",
+    "version": "1.2.1",
     "items": [
-      { "text": "ログインでデータ・購入を同期", "highlight": true },
-      { "text": "スマホ・タブレット・Web対応", "highlight": true },
-      { "text": "iPad横画面に最適化", "highlight": true },
-      { "text": "シラバスに下線", "highlight": true },
-      { "text": "出題範囲を節ごとに", "highlight": true },
-      { "text": "シラバスから問題演習へ", "highlight": true },
-      { "text": "出題モード「たっぷり練習」", "highlight": true },
-      { "text": "受験日の通知" },
-      { "text": "解説に回答履歴" },
-      { "text": "模試を本番の章配分に" },
-      { "text": "TA模試を45問に" },
-      { "text": "振り返りでブックマーク" },
-      { "text": "アプリ内フィードバック" },
-      { "text": "CTFLを含むセット" },
-      { "text": "新しいアプリアイコン" },
-      { "text": "デザインと動きを改善" },
       { "text": "細かな改善と不具合修正" }
     ]
   }
