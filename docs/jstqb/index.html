@@ -1,51 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="/jstqb/">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <!-- Flutter 到引擎启动时才加这条；加载页在那之前就显示，没有它手机浏览器按 980 宽排，整页缩得很小。 -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta name="description" content="JSTQB試験対策 - CTFL・TA・TM。シラバスを読む・問題を解く・模擬試験で試す。">
 
-  <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="JSTQB対策">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
   <title>JSTQB対策</title>
   <meta name="theme-color" content="#F6F6F6">
-  <!-- 页面底色一开页就定（pika 11-01「顶部和底部有部分背景色没切换」）：iPhone 加到主屏幕打开时，状态栏那一条在网页外面，
-       iOS 只在启动时按 html 底色画一次，之后 Dart 再换（web_page_color_web.dart）也不跟着变。所以在这里先按 マイページ「外観」
-       存的背景色、浅深色算好页面底，html、body、启动页、theme-color 都用它。颜色表、深色换算同 lib/state/page_background.dart，
-       test/design/web_page_color_boot_test.dart 核对两边一致。 -->
   <script>
     (function () {
       const light = { white: [250, 250, 250], gray: [246, 246, 246], cream: [250, 247, 240], mint: [240, 246, 241], blue: [240, 244, 250] };
       const darkShift = [236, 235, 233];
       let rgb = light.gray, mode = '';
+      const prefs = location.pathname.includes('/web-test/') ? 'webtest.' : 'flutter.';
       try {
-        const saved = JSON.parse(localStorage.getItem('flutter.appAppearance.pageBackground') || 'null');
+        const saved = JSON.parse(localStorage.getItem(prefs + 'appAppearance.pageBackground') || 'null');
         if (light[saved]) rgb = light[saved];
-        mode = localStorage.getItem('flutter.appAppearance.themeMode') || '';
+        mode = localStorage.getItem(prefs + 'appAppearance.themeMode') || '';
       } catch (_) {}
       const followsSystem = !mode.includes('dark') && !mode.includes('light');
       const dark = mode.includes('dark') || (followsSystem && matchMedia('(prefers-color-scheme: dark)').matches);
@@ -54,7 +35,6 @@
       const css = dark ? darkCss : lightCss;
       document.documentElement.style.setProperty('--page', css);
       document.documentElement.style.background = css;
-      // 跟系统时 theme-color 分浅深两条：运行中切系统浅深色，浏览器按 media 自己挑（JST-307）。
       const meta = document.querySelector('meta[name="theme-color"]');
       if (followsSystem) {
         meta.setAttribute('content', lightCss);
@@ -70,31 +50,21 @@
     })();
   </script>
   <link rel="manifest" href="manifest.json">
-  <!-- 启动要等的外部文件一开页就并行下载（pika 10-31「刷新后白了10几秒」）：Flutter 引擎画第一帧前要的 Roboto，
-       firebase_core_web 一个接一个 import() 的 Firebase 脚本（版本同 firebase_core_web 的 supportedFirebaseJsSdkVersion，
-       test/design/web_boot_preload_test.dart 核对）。以前要等程序跑起来才开始下，而且 Firebase 三个是排队下的。 -->
   <link rel="preload" href="https://fonts.gstatic.com/s/roboto/v32/KFOmCnqEu92Fr1Me4GZLCzYlKw.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="modulepreload" href="https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js">
   <link rel="modulepreload" href="https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js">
   <link rel="modulepreload" href="https://www.gstatic.com/firebasejs/13.1.0/firebase-firestore-pipelines.js">
-  <!-- mixpanel_flutter 网页版要先载入它自带的 JS（JST-197） -->
   <script src="./assets/packages/mixpanel_flutter/assets/mixpanel.js"></script>
-  <!-- 启动加载页（pika 10-30）：和 App 系统启动页一样的书组 + App 名（不带「読む・解く・試す」），下面一条三科渐变的进度条和变化的文字、百分比。
-       百分比是真实下载的字节数 ÷ 全部要下的（boot_sizes.json）：程序、引擎由 flutter_bootstrap.js 报，字体、シラバス由 Dart 报（题目正文不在网页包里，JST-243）
-       （lib/data/platform/boot_progress*.dart），开始页或启动页第一帧画出后收起进度条，书组留在原位。 -->
   <style>
     html, body { margin: 0; height: 100%; background: var(--page, #F6F6F6); }
     #boot { position: fixed; inset: 0; z-index: 10; background: var(--page, #F6F6F6); color: rgba(29, 40, 51, 0.58);
       font: 15px/20px -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", Roboto, sans-serif; }
     #boot.dark { background: var(--page, #0A0B0D); color: rgba(238, 242, 245, 0.58); }
-    /* 交接（pika 10-30）：图是 Flutter 书组的截图（窄屏 402×874 3 倍、宽屏 1180×820 4 倍，浅深各一张，书组改了要重截；底色按截图时的 #F6F6F6 / #101215 抠成透明，换了背景色也不露底，pika 11-01），同位置同像素，底色和图一起瞬间去掉看不出来，只有进度条淡出。 */
     #boot.leaving, #boot.dark.leaving { background: transparent; pointer-events: none; }
     #boot img { position: absolute; }
     #boot .progress { position: absolute; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; transition: opacity .2s linear; }
     #boot.leaving img { visibility: hidden; }
     #boot.leaving .progress { opacity: 0; }
-    /* 要等时（pika 10-31 选「只在要等时放书倒下」）：CTFL 那本单独一张图，同一版刷新等过 0.5 秒就照启动页倒向 TM；
-       等过 2 秒还没出来，App 名下面出三个跳动的点（三科色），一直跳到出来。真在下载时只亮进度条，不出点。 */
     #boot .dots { position: absolute; left: 0; right: 0; display: flex; justify-content: center; gap: 8px; visibility: hidden; transition: opacity .2s linear; }
     #boot.waiting .dots { visibility: visible; }
     #boot.loading .dots, #boot.quiet .dots { visibility: hidden; }
@@ -106,19 +76,15 @@
     #boot.wide .dots { gap: calc(10px * var(--k)); }
     #boot.wide .dots i { width: calc(10px * var(--k)); height: calc(10px * var(--k)); }
     @keyframes boot-dot { 0%, 60%, 100% { transform: translateY(0); opacity: .35; } 30% { transform: translateY(-6px); opacity: 1; } }
-    /* 进度条默认不显示：只有真要下载才亮（pika 10-30「不需要下载不要假装下载」）。 */
     #boot .progress { visibility: hidden; }
     #boot.loading .progress { visibility: visible; }
-    /* 同一版刷新：什么都不画，等原页面出来。 */
     #boot.quiet img { visibility: hidden; }
     #boot .track { width: min(300px, calc(100vw - 80px)); height: 8px; border-radius: 4px; overflow: hidden; background: rgba(29, 40, 51, 0.08); }
     #boot.dark .track { background: rgba(238, 242, 245, 0.12); }
-    /* 三科渐变：CTFL → TM → TA 的科目浅（设计系统「名字与用法」的「三科的值」），整条铺满、用 clip 露出已完成部分，颜色不随进度挤压。 */
     #boot .fill { height: 100%; width: 100%; clip-path: inset(0 100% 0 0 round 4px); transition: clip-path .2s linear;
       background: linear-gradient(90deg, #33A9DD, #3792AC 50%, #3CAEA8); }
     #boot.dark .fill { background: linear-gradient(90deg, #2AA8E0, #3591AB 50%, #3AAEA7); }
     #boot .line { margin-top: 14px; display: flex; gap: 8px; font-variant-numeric: tabular-nums; }
-    /* 宽屏：条和「学習を始める」同宽 405，随画板缩放（--k 由下面的脚本设）。 */
     #boot.wide { font-size: calc(17px * var(--k)); line-height: calc(24px * var(--k)); }
     #boot.wide .track { width: calc(405px * var(--k)); height: calc(10px * var(--k)); border-radius: calc(5px * var(--k)); }
     #boot.wide .line { margin-top: calc(16px * var(--k)); }
@@ -138,40 +104,42 @@
       const progress = root.querySelector('.progress'), dots = root.querySelector('.dots');
       let dark = false;
       try {
-        // 跟 App 里选的外观走（shared_preferences 在网页存在 localStorage，键带「flutter.」前缀）。
-        const mode = localStorage.getItem('flutter.appAppearance.themeMode') || '';
+        const prefs = location.pathname.includes('/web-test/') ? 'webtest.' : 'flutter.';
+        const mode = localStorage.getItem(prefs + 'appAppearance.themeMode') || '';
         dark = mode.includes('dark') || (!mode.includes('light') && matchMedia('(prefers-color-scheme: dark)').matches);
       } catch (_) {}
       if (dark) root.classList.add('dark');
-      // 书组 + App 名的图：Flutter 启动页第一帧的截图，最右的 CTFL 抠成单独一张（boot/ctfl*.png，带透明），其余是 boot/base*.png；
-      // 位置照 brand_lockup.dart 的 BrandLaunchLayout 算。CTFL 图在原图里的框和转轴（书的左下角）按原图像素写在这里。
-      const sprite = { phone: { w: 690, x: 410, y: 12, cw: 94, ch: 243, px: 12, py: 228 },
-                       pad: { w: 1200, x: 704, y: 12, cw: 152, ch: 390, px: 20, py: 367 } };
+      const sprite = {"phone":{"w":690,"x":410,"y":12,"cw":94,"ch":243,"px":12,"py":228},"pad":{"w":1200,"x":704,"y":12,"cw":152,"ch":390,"px":20,"py":367}};
+      const stages = {"engine":"テスト環境を構築中","screen":"画面をスモークテスト中","settings":"設定を回帰テスト中","fonts":"文字化けがないか確認中","syllabus":"シラバスを熟読中"};
+      if (!sprite) { img.remove(); ctfl.remove(); }
       let wide = null;
       function place() {
         const w = innerWidth, h = innerHeight, isWide = w >= 874;
         let cy, iw, ih;
         if (isWide) {
-          // 宽屏：1180×820 画板按 min(1, 宽÷1180, 高÷820) 缩放、竖向居中；图中心在画板 271.5。
           const k = Math.min(1, w / 1180, h / 820);
           iw = 300 * k; ih = 162 * k; cy = (h - 820 * k) / 2 + 271.5 * k;
           root.style.setProperty('--k', k);
         } else {
-          // 窄屏：图 230×140，中心在高的 324/874（同 iOS 启动页 centerY × 0.7414）。
           iw = 230; ih = 140; cy = h * 324 / 874;
         }
         if (isWide !== wide) {
           wide = isWide;
           root.classList.toggle('wide', isWide);
+        }
+        if (sprite && img.dataset.wide !== String(isWide)) {
+          img.dataset.wide = String(isWide);
           const suffix = (isWide ? '-pad' : '') + (dark ? '-dark' : '') + '.png';
           img.src = 'boot/base' + suffix;
           ctfl.src = 'boot/ctfl' + suffix;
         }
         const left = (w - iw) / 2, top = cy - ih / 2;
-        Object.assign(img.style, { width: iw + 'px', height: ih + 'px', left: left + 'px', top: top + 'px' });
-        const sp = isWide ? sprite.pad : sprite.phone, s = iw / sp.w;
-        Object.assign(ctfl.style, { width: sp.cw * s + 'px', height: sp.ch * s + 'px', left: left + sp.x * s + 'px', top: top + sp.y * s + 'px',
-          transformOrigin: sp.px * s + 'px ' + sp.py * s + 'px' });
+        if (sprite) {
+          Object.assign(img.style, { width: iw + 'px', height: ih + 'px', left: left + 'px', top: top + 'px' });
+          const sp = isWide ? sprite.pad : sprite.phone, s = iw / sp.w;
+          Object.assign(ctfl.style, { width: sp.cw * s + 'px', height: sp.ch * s + 'px', left: left + sp.x * s + 'px', top: top + sp.y * s + 'px',
+            transformOrigin: sp.px * s + 'px ' + sp.py * s + 'px' });
+        }
         const below = cy + ih / 2 + 16 * (isWide ? Math.min(1, w / 1180, h / 820) : 1);
         progress.style.top = below + 'px';
         dots.style.top = below + 8 + 'px';
@@ -179,25 +147,20 @@
       place();
       addEventListener('resize', place);
       let total = 0, got = 0, closing = false, stamp = null;
-      const stampKey = 'jstqbBootStamp';
+      const stampKey = location.pathname.includes('/web-test/') ? 'jstqbBootStamp-test' : 'jstqbBootStamp';
       let seenStamp = null;
       try { seenStamp = localStorage.getItem(stampKey); } catch (_) {}
       const isReload = performance.getEntriesByType('navigation')[0]?.type === 'reload';
-      // 刷新且走完过一次：大概率同一版，先不画书组；flutter_bootstrap.js 查到版本变了再画回来。
-      // 0.5 秒还没出来（网慢、等 Firebase 等外部脚本）就把书组画回来，不留一整屏空白（pika 10-31「刷新后白了10几秒」）。
       if (isReload && seenStamp) {
         root.classList.add('quiet');
         setTimeout(() => {
           root.classList.remove('quiet');
-          // 同一版刷新出来后回到原页面，不经启动页：这里替它放 CTFL 倒下（同 brand_mark.dart 的 BrandFall，再停 0.3 秒起步）。
           if (!closing && !root.classList.contains('loading')) setTimeout(fall, 300);
         }, 500);
       }
-      // 普通打开之后还会放 Flutter 启动页的倒下，这里不放，免得书倒了又站起来再倒。
       setTimeout(() => { if (!closing) root.classList.add('waiting'); }, 2000);
       function fall() {
-        if (closing || !ctfl.animate) return;
-        // 越倒越快到 −9°（0.55 秒），回弹到 −5.5° 再落回，小余弹到 −8° 再落回，停在 −9°；共 1.14 秒。
+        if (closing || !sprite || !ctfl.animate) return;
         const at = (deg, ms, easing) => ({ transform: 'rotate(' + deg + 'deg)', offset: ms / 1140, easing });
         ctfl.animate([
           at(0, 0, 'cubic-bezier(.5, 0, .9, .4)'),
@@ -216,9 +179,7 @@
         root.setAttribute('aria-valuenow', String(v));
       }
       window.jstqbBoot = {
-        // 全部要下的字节数（flutter_bootstrap.js 读 boot_sizes.json 后设）；读不到时只显示文字。
         total(bytes) { total = bytes; show(); },
-        // 记下这次构建的记号，返回「本机已经完整走完过这一版」（= 没东西要下）。
         seen(value) {
           stamp = value;
           const same = value === seenStamp;
@@ -226,18 +187,15 @@
           this.sameBuildReload = same && isReload;
           return same;
         },
-        // 真在下载：亮进度条。
         loading() { root.classList.remove('quiet'); root.classList.add('loading'); },
-        // 同一版刷新（Dart 读）：回到刷新前的页面，不放启动动画。
         sameBuildReload: false,
-        stage(text) { label.textContent = text; },
+        stage(key) { label.textContent = stages[key] || ''; },
         add(bytes) { got += bytes; show(); },
         done() {
           if (closing) return;
           closing = true;
           removeEventListener('resize', place);
           got = total;
-          // 启动各步到这里的毫秒数打一行（Dart 的 BootProgress.mark、下面 flutter_bootstrap.js 的点），查刷新慢卡在哪一步。
           try {
             const marks = performance.getEntriesByType('mark').filter((m) => m.name.startsWith('jstqb:'));
             console.info('[启动耗时 ms]', marks.map((m) => m.name.slice(6) + ' ' + Math.round(m.startTime)).join(', ') + ', 出页面 ' + Math.round(performance.now()));
@@ -245,7 +203,6 @@
           try { if (stamp) localStorage.setItem(stampKey, stamp); } catch (_) {}
           fill.style.clipPath = 'inset(0 0 0 0 round 4px)';
           if (total) pct.textContent = '100%';
-          // Flutter 根部切页有 200 毫秒淡入（launch_gate.dart），等它全显再交接，不然书会闪淡一下。
           setTimeout(() => {
             root.classList.add('leaving');
             setTimeout(() => root.remove(), 300);

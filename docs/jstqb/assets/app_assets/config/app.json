@@ -343,8 +343,24 @@
       }
     }
   },
+  "appIcons": [
+    {"name": "classic", "title": "クラシック"},
+    {"name": "geek", "title": "ギーク", "alternateName": "AppIcon-Night"},
+    {"name": "modern", "title": "モダン", "alternateName": "AppIcon-Sky"},
+    {"name": "simple", "title": "シンプル", "alternateName": "AppIcon-Classic"}
+  ],
+  "storeKitProducts": {
+    "jstqbios.ctfl.full": ["ctfl"],
+    "jstqbios.ta.full": ["ta"],
+    "jstqbios.tm.full": ["tm"],
+    "jstqbios.tatm.bundle": ["ta", "tm"],
+    "jstqb.ios.ctfl_ta.full": ["ctfl", "ta"],
+    "jstqb.ios.ctfl_tm.full": ["ctfl", "tm"],
+    "jstqb.ios.ctfl_ta_tm.full": ["ctfl", "ta", "tm"]
+  },
   "sync": {
-    "root": "users/{uid}"
+    "root": "users/{uid}",
+    "untaggedFeedback": true
   },
   "firebase": {
     "android": {
@@ -364,6 +380,33 @@
       "storageBucket": "pikacode-jstqb.firebasestorage.app"
     }
   },
+  "firebaseDev": {
+    "ios": {
+      "apiKey": "AIzaSyDpm-iylFHyWPdK6Q7lfP_iNGRcSl1dt4o",
+      "appId": "1:572734184295:ios:4f9dc6dd79a0affdb46dc2",
+      "messagingSenderId": "572734184295",
+      "projectId": "pikacode-jstqb-dev",
+      "storageBucket": "pikacode-jstqb-dev.firebasestorage.app",
+      "iosBundleId": "me.pikacode.jstqbios",
+      "iosClientId": "572734184295-km5gtamtfk6u5u67q4m0dv9quahv8plk.apps.googleusercontent.com"
+    },
+    "android": {
+      "apiKey": "AIzaSyBl58BnC71KAdkBIRIOswherr-YdVHBEck",
+      "appId": "1:572734184295:android:fb5a61aa8affe39bb46dc2",
+      "messagingSenderId": "572734184295",
+      "projectId": "pikacode-jstqb-dev",
+      "authDomain": "pikacode-jstqb-dev.firebaseapp.com",
+      "storageBucket": "pikacode-jstqb-dev.firebasestorage.app"
+    },
+    "web": {
+      "apiKey": "AIzaSyCQYUzbzflqYVdEKUdREMNT5ducXsDwP1A",
+      "appId": "1:572734184295:web:40ee9899c1a6a3abb46dc2",
+      "messagingSenderId": "572734184295",
+      "projectId": "pikacode-jstqb-dev",
+      "authDomain": "pikacode-jstqb-dev.firebaseapp.com",
+      "storageBucket": "pikacode-jstqb-dev.firebasestorage.app"
+    }
+  },
   "questionApi": "https://jstqb-questions.pikacode.workers.dev",
   "revenueCat": {
     "apiKeys": {
@@ -372,24 +415,8 @@
     }
   },
   "whatsNew": {
-    "version": "1.2.0",
+    "version": "1.2.1",
     "items": [
-      { "text": "ログインでデータ・購入を同期", "highlight": true },
-      { "text": "スマホ・タブレット・Web対応", "highlight": true },
-      { "text": "iPad横画面に最適化", "highlight": true },
-      { "text": "シラバスに下線", "highlight": true },
-      { "text": "出題範囲を節ごとに", "highlight": true },
-      { "text": "シラバスから問題演習へ", "highlight": true },
-      { "text": "出題モード「たっぷり練習」", "highlight": true },
-      { "text": "受験日の通知" },
-      { "text": "解説に回答履歴" },
-      { "text": "模試を本番の章配分に" },
-      { "text": "TA模試を45問に" },
-      { "text": "振り返りでブックマーク" },
-      { "text": "アプリ内フィードバック" },
-      { "text": "CTFLを含むセット" },
-      { "text": "新しいアプリアイコン" },
-      { "text": "デザインと動きを改善" },
       { "text": "細かな改善と不具合修正" }
     ]
   }
