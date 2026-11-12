@@ -395,7 +395,7 @@
       "appId": "1:572734184295:android:fb5a61aa8affe39bb46dc2",
       "messagingSenderId": "572734184295",
       "projectId": "pikacode-jstqb-dev",
-      "authDomain": "pikacode-jstqb-dev.firebaseapp.com",
+      "authDomain": "test.angelheart.ai",
       "storageBucket": "pikacode-jstqb-dev.firebasestorage.app"
     },
     "web": {
@@ -403,7 +403,7 @@
       "appId": "1:572734184295:web:40ee9899c1a6a3abb46dc2",
       "messagingSenderId": "572734184295",
       "projectId": "pikacode-jstqb-dev",
-      "authDomain": "pikacode-jstqb-dev.firebaseapp.com",
+      "authDomain": "test.angelheart.ai",
       "storageBucket": "pikacode-jstqb-dev.firebasestorage.app"
     }
   },
@@ -413,11 +413,5 @@
       "ios": "appl_OgHzgzVEzZtFjuxeCkMIxFlNCUY",
       "android": "goog_ssWTUTInPLFktuttnHEJPwZhvEd"
     }
-  },
-  "whatsNew": {
-    "version": "1.2.1",
-    "items": [
-      { "text": "細かな改善と不具合修正" }
-    ]
   }
 }
