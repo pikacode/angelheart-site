@@ -9,7 +9,7 @@
     "tagline": "読む・解く・試す",
     "appStoreID": "6811751328",
     "playStoreID": "ai.angelheart.jstqb",
-    "playStoreLive": false,
+    "playStoreLive": true,
     "supportEmail": "support@angelheart.ai",
     "links": {
       "privacy": "https://angelheart.ai/apps/jstqb/privacy/",
