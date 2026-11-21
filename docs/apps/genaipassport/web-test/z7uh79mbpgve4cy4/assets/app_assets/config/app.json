@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "appID": "genaipassport",
+  "inDevelopment": true,
+  "brand": {
+    "name": {
+      "latin": "生成AIパスポート",
+      "japanese": "試験対策"
+    },
+    "tagline": "読む・解く・試す",
+    "intro": "passport",
+    "networkMark": "logo3",
+    "productIcon": "brandMark",
+    "purchaseStamp": {
+      "image": "brand/purchase_stamp.png",
+      "smallImage": "brand/purchase_stamp_small.png",
+      "color": "#FFFFFF",
+      "startColor": "#000000",
+      "colorDelayMs": 710,
+      "colorMs": 1390,
+      "opacity": 1,
+      "onPassport": { "x": 0.1132, "y": 0.2438, "width": 0.65, "height": 0.4148, "rotation": 7.22 },
+      "date": { "baseline": 0.8667, "fontSize": 0.1394, "letterSpacing": 0.0121 },
+      "startScale": 45,
+      "startOpacity": 0,
+      "shake": 4.5,
+      "passportSize": 180,
+      "centerY": 392,
+      "referenceHeight": 874,
+      "dim": 0.6,
+      "startDelayMs": 600,
+      "flyMs": 1150,
+      "holdBeforeMs": 500,
+      "stampMs": 990,
+      "holdAfterMs": 2500,
+      "shadowOpacity": 0.35,
+      "shadowLift": 1.5
+    },
+    "startButton": "AIの学習を始めよう",
+    "welcomeMessage": ["いっしょに合格を目指しましょう。", "読む・解く・試すで、しっかり対策。"],
+    "appStoreID": "6832014290",
+    "supportEmail": "support@angelheart.ai",
+    "links": {
+      "privacy": "https://angelheart.ai/apps/genaipassport/privacy/",
+      "terms": "https://angelheart.ai/apps/genaipassport/terms/",
+      "support": "https://angelheart.ai/apps/genaipassport/support/",
+      "webTest": "https://angelheart.ai/apps/genaipassport/web-test/z7uh79mbpgve4cy4/"
+    },
+    "termsRevision": 1,
+    "unofficialTitles": [
+      "非公式のアプリです",
+      "問題・解説について",
+      "試験の申込み・最新情報"
+    ],
+    "unofficialMessage": [
+      "本アプリは個人が開発した非公式の学習アプリです。一般社団法人生成AI活用普及協会（GUGA）が作成・承認したものではありません。",
+      "問題・解説・シラバス解説は、公式シラバスの学習目標をもとに独自に作成したもので、実際の試験問題や公式教材ではありません。",
+      "試験の申込みや最新の情報は、生成AIパスポート公式サイトでご確認ください。"
+    ],
+    "syllabusAbout": {
+      "points": [
+        "GUGA公式の教材ではありません。",
+        "知識の範囲は公式シラバスと同じです。",
+        "公式シラバスの項目ごとに書き下ろした解説です。",
+        "各節の最後に試験の要点があります。",
+        "問題も公式の内容をもとに作っています。"
+      ]
+    },
+    "markPractice": {
+      "text": "生成AIの出力には誤りが含まれることがあるため、内容を確認してから使う。",
+      "marked": "内容を確認してから使う"
+    }
+  },
+  "exams": ["GENAI"],
+  "brandBooks": ["GENAI"],
+  "groups": [
+    {
+      "id": "genai",
+      "title": "生成AIパスポート",
+      "dot": { "light": "#008484", "dark": "#1AA3A3" },
+      "exams": ["GENAI"]
+    }
+  ],
+  "entitlements": [
+    { "id": "genai", "exams": ["GENAI"] }
+  ],
+  "bundles": [],
+  "appIcons": [
+    {"name": "white", "title": "クラシック"},
+    {"name": "passport_navy", "title": "ナイト", "alternateName": "AppIcon-PassportNavy"},
+    {"name": "neural", "title": "ノード", "alternateName": "AppIcon-Neural"},
+    {"name": "navy", "title": "ニューロン", "alternateName": "AppIcon-Navy"}
+  ],
+  "sync": {
+    "root": "apps/genaipassport/users/{uid}"
+  },
+  "firebase": {
+    "web": {
+      "apiKey": "AIzaSyBrY_wuvG5ZpDSm8yvPCbWwJ6xTk8IHSgA",
+      "appId": "1:23389998110:web:12380602d41bc97f71320f",
+      "messagingSenderId": "23389998110",
+      "projectId": "pikacode-jstqb",
+      "authDomain": "angelheart.ai",
+      "storageBucket": "pikacode-jstqb.firebasestorage.app"
+    }
+  },
+  "firebaseDev": {
+    "ios": {
+      "apiKey": "AIzaSyDpm-iylFHyWPdK6Q7lfP_iNGRcSl1dt4o",
+      "appId": "1:572734184295:ios:a4d111149508d95db46dc2",
+      "messagingSenderId": "572734184295",
+      "projectId": "pikacode-jstqb-dev",
+      "storageBucket": "pikacode-jstqb-dev.firebasestorage.app",
+      "iosBundleId": "ai.angelheart.genaipassport",
+      "iosClientId": "572734184295-eub2ba24no7qc2fnuri8pjhbdjf0gr47.apps.googleusercontent.com"
+    },
+    "android": {
+      "apiKey": "AIzaSyBl58BnC71KAdkBIRIOswherr-YdVHBEck",
+      "appId": "1:572734184295:android:daf12260cf5e36f1b46dc2",
+      "messagingSenderId": "572734184295",
+      "projectId": "pikacode-jstqb-dev",
+      "authDomain": "test.angelheart.ai",
+      "storageBucket": "pikacode-jstqb-dev.firebasestorage.app"
+    },
+    "web": {
+      "apiKey": "AIzaSyCQYUzbzflqYVdEKUdREMNT5ducXsDwP1A",
+      "appId": "1:572734184295:web:a68f0bf1e5e50e57b46dc2",
+      "messagingSenderId": "572734184295",
+      "projectId": "pikacode-jstqb-dev",
+      "authDomain": "test.angelheart.ai",
+      "storageBucket": "pikacode-jstqb-dev.firebasestorage.app"
+    }
+  },
+  "revenueCat": {
+    "apiKeys": {
+      "ios": "appl_laxnyiIDqPHlHhIVDVHhFsdJpqf"
+    }
+  },
+  "questionApi": "https://jstqb-questions.pikacode.workers.dev",
+  "storeKitProducts": {
+    "genaipassport.genai.full": ["genai"]
+  }
+}

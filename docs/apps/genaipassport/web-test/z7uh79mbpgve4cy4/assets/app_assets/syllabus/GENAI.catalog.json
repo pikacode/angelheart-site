@@ -1,0 +1,202 @@
+{
+  "id": "genai-2027",
+  "examName": "GENAI",
+  "version": "2027",
+  "chapters": [
+    {
+      "id": "chapter-1",
+      "number": "1",
+      "title": "AIの基礎と歴史",
+      "sections": [
+        {
+          "id": "section-1.1",
+          "number": "1.1",
+          "title": "AIの基本的な仕組み"
+        },
+        {
+          "id": "section-1.2",
+          "number": "1.2",
+          "title": "機械学習"
+        },
+        {
+          "id": "section-1.3",
+          "number": "1.3",
+          "title": "ニューラルネットワーク"
+        },
+        {
+          "id": "section-1.4",
+          "number": "1.4",
+          "title": "AIの歴史"
+        }
+      ]
+    },
+    {
+      "id": "chapter-2",
+      "number": "2",
+      "title": "生成AI",
+      "sections": [
+        {
+          "id": "section-2.1",
+          "number": "2.1",
+          "title": "生成AIを支える技術革新（Transformer以降）"
+        },
+        {
+          "id": "section-2.2",
+          "number": "2.2",
+          "title": "生成AIの学習プロセス"
+        },
+        {
+          "id": "section-2.3",
+          "number": "2.3",
+          "title": "生成AIの生成（推論）プロセス"
+        },
+        {
+          "id": "section-2.4",
+          "number": "2.4",
+          "title": "LLM（大規模言語モデル）の基礎"
+        },
+        {
+          "id": "section-2.5",
+          "number": "2.5",
+          "title": "ChatGPTと主要な生成AIモデルの動向"
+        },
+        {
+          "id": "section-2.6",
+          "number": "2.6",
+          "title": "各モダリティの生成AI"
+        }
+      ]
+    },
+    {
+      "id": "chapter-3",
+      "number": "3",
+      "title": "AIエージェント",
+      "sections": [
+        {
+          "id": "section-3.1",
+          "number": "3.1",
+          "title": "AIエージェントとは"
+        },
+        {
+          "id": "section-3.2",
+          "number": "3.2",
+          "title": "RAG（検索拡張生成）"
+        },
+        {
+          "id": "section-3.3",
+          "number": "3.3",
+          "title": "AIエージェントの仕組み"
+        },
+        {
+          "id": "section-3.4",
+          "number": "3.4",
+          "title": "MCP・Agent Skillsと外部連携"
+        },
+        {
+          "id": "section-3.5",
+          "number": "3.5",
+          "title": "AIエージェントのツールと活用事例"
+        },
+        {
+          "id": "section-3.6",
+          "number": "3.6",
+          "title": "AIエージェントのリスク・安全性・評価"
+        }
+      ]
+    },
+    {
+      "id": "chapter-4",
+      "number": "4",
+      "title": "生成AIのリスク予防・AI倫理・ガバナンス",
+      "sections": [
+        {
+          "id": "section-4.1",
+          "number": "4.1",
+          "title": "生成AI利用者の基本マインドセット"
+        },
+        {
+          "id": "section-4.2",
+          "number": "4.2",
+          "title": "生成AIの代表的リスク"
+        },
+        {
+          "id": "section-4.3",
+          "number": "4.3",
+          "title": "シャドーAIと企業コンプライアンス"
+        },
+        {
+          "id": "section-4.4",
+          "number": "4.4",
+          "title": "AI出力の評価と検証"
+        },
+        {
+          "id": "section-4.5",
+          "number": "4.5",
+          "title": "個人情報・プライバシー・秘密保持"
+        },
+        {
+          "id": "section-4.6",
+          "number": "4.6",
+          "title": "著作権・知的財産・生成物の権利"
+        },
+        {
+          "id": "section-4.7",
+          "number": "4.7",
+          "title": "AI倫理とAI事業者ガイドライン"
+        },
+        {
+          "id": "section-4.8",
+          "number": "4.8",
+          "title": "AIガバナンスと社内ガイドライン"
+        },
+        {
+          "id": "section-4.9",
+          "number": "4.9",
+          "title": "AI法・国際ルール・AI安全保障"
+        }
+      ]
+    },
+    {
+      "id": "chapter-5",
+      "number": "5",
+      "title": "生成AIの実践と活用事例",
+      "sections": [
+        {
+          "id": "section-5.1",
+          "number": "5.1",
+          "title": "プロンプトエンジニアリング"
+        },
+        {
+          "id": "section-5.2",
+          "number": "5.2",
+          "title": "文書作成・コミュニケーション業務での活用"
+        },
+        {
+          "id": "section-5.3",
+          "number": "5.3",
+          "title": "企画・マーケティング業務での活用"
+        },
+        {
+          "id": "section-5.4",
+          "number": "5.4",
+          "title": "クリエイティブ制作での活用"
+        },
+        {
+          "id": "section-5.5",
+          "number": "5.5",
+          "title": "データ分析・リサーチ業務での活用"
+        },
+        {
+          "id": "section-5.6",
+          "number": "5.6",
+          "title": "開発・業務自動化での活用"
+        },
+        {
+          "id": "section-5.7",
+          "number": "5.7",
+          "title": "業種別に見る生成AI活用"
+        }
+      ]
+    }
+  ]
+}
