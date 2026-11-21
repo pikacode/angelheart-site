@@ -25,16 +25,14 @@
   <link rel="icon" type="image/png" href="favicon.png"/>
 
   <title>JSTQB試験対策 問題集・模擬試験 | Foundation Level（CTFL）・テストマネージャ・テストアナリスト Web版</title>
-  <meta name="theme-color" content="#F4F4F4">
+  <meta name="theme-color" content="#E5E5EA">
   <script>
     (function () {
-      const light = { white: [250, 250, 250], gray: [244, 244, 244], cream: [250, 247, 240], mint: [240, 246, 241], blue: [240, 244, 250] };
-      const darkShift = [234, 233, 231];
-      let rgb = light.gray, mode = '';
+      const light = [229, 229, 234];
+      const darkShift = [221, 220, 223];
+      let rgb = light, mode = '';
       const prefs = location.pathname.includes('/web-test/') ? 'webtest.' : 'flutter.';
       try {
-        const saved = JSON.parse(localStorage.getItem(prefs + 'appAppearance.pageBackground') || 'null');
-        if (light[saved]) rgb = light[saved];
         mode = localStorage.getItem(prefs + 'appAppearance.themeMode') || '';
       } catch (_) {}
       const followsSystem = !mode.includes('dark') && !mode.includes('light');
@@ -65,14 +63,15 @@
   <link rel="modulepreload" href="https://www.gstatic.com/firebasejs/13.1.0/firebase-firestore-pipelines.js">
   <script src="./assets/packages/mixpanel_flutter/assets/mixpanel.js"></script>
   <style>
-    html, body { margin: 0; height: 100%; background: var(--page, #F4F4F4); }
-    #boot { position: fixed; inset: 0; z-index: 10; background: var(--page, #F4F4F4); color: rgba(29, 40, 51, 0.58);
+    html, body { margin: 0; height: 100%; background: var(--page, #E5E5EA); }
+    #boot { position: fixed; inset: 0; z-index: 10; background: var(--page, #E5E5EA); color: rgba(29, 40, 51, 0.58);
       font: 15px/20px -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", Roboto, sans-serif; }
-    #boot.dark { background: var(--page, #0A0B0D); color: rgba(238, 242, 245, 0.58); }
+    #boot.dark { background: var(--page, #08090B); color: rgba(238, 242, 245, 0.58); }
     #boot.leaving, #boot.dark.leaving { background: transparent; pointer-events: none; }
     #boot img { position: absolute; }
     #boot .progress { position: absolute; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; transition: opacity .2s linear; }
     #boot.leaving img { visibility: hidden; }
+    #boot.fadeout.leaving img { visibility: visible; opacity: 0; transition: opacity .3s ease-out; }
     #boot.leaving .progress { opacity: 0; }
     #boot .dots { position: absolute; left: 0; right: 0; display: flex; justify-content: center; gap: 8px; visibility: hidden; transition: opacity .2s linear; }
     #boot.waiting .dots { visibility: visible; }
@@ -135,19 +134,22 @@
         dark = mode.includes('dark') || (!mode.includes('light') && matchMedia('(prefers-color-scheme: dark)').matches);
       } catch (_) {}
       if (dark) root.classList.add('dark');
-      const sprite = {"phone":{"w":690,"x":410,"y":12,"cw":94,"ch":243,"px":12,"py":228},"pad":{"w":1200,"x":704,"y":12,"cw":152,"ch":390,"px":20,"py":367}};
+      const sprite = {"phone":{"w":690,"x":410,"y":12,"cw":94,"ch":243,"px":12,"py":228}};
       const stages = {"engine":"テスト環境を構築中","screen":"画面をスモークテスト中","settings":"設定を回帰テスト中","fonts":"文字化けがないか確認中","syllabus":"シラバスを熟読中"};
-      if (!sprite) { img.remove(); ctfl.remove(); }
+      const hasCtfl = !!(sprite && sprite.phone.cw);
+      if (!sprite) img.remove();
+      if (!hasCtfl) ctfl.remove();
       let wide = null;
       function place() {
         const w = innerWidth, h = innerHeight, isWide = w >= 874;
-        let cy, iw, ih;
+        let cy, iw, ih, half;
+        const box = sprite ? sprite.phone : {};
         if (isWide) {
           const k = Math.min(1, w / 1180, h / 820);
-          iw = 300 * k; ih = 162 * k; cy = (h - 820 * k) / 2 + 271.5 * k;
+          iw = box.boxW || 230; ih = box.boxH || 140; half = 70; cy = (h - 874 * k) / 2 + 324 * k;
           root.style.setProperty('--k', k);
         } else {
-          iw = 230; ih = 140; cy = h * 324 / 874;
+          iw = box.boxW || 230; ih = box.boxH || 140; half = 70; cy = h * 324 / 874;
         }
         if (isWide !== wide) {
           wide = isWide;
@@ -155,18 +157,18 @@
         }
         if (sprite && img.dataset.wide !== String(isWide)) {
           img.dataset.wide = String(isWide);
-          const suffix = (isWide ? '-pad' : '') + (dark ? '-dark' : '') + '.png';
+          const suffix = (dark ? '-dark' : '') + '.png';
           img.src = 'boot/base' + suffix;
-          ctfl.src = 'boot/ctfl' + suffix;
+          if (hasCtfl) ctfl.src = 'boot/ctfl' + suffix;
         }
         const left = (w - iw) / 2, top = cy - ih / 2;
-        if (sprite) {
-          Object.assign(img.style, { width: iw + 'px', height: ih + 'px', left: left + 'px', top: top + 'px' });
-          const sp = isWide ? sprite.pad : sprite.phone, s = iw / sp.w;
+        if (sprite) Object.assign(img.style, { width: iw + 'px', height: ih + 'px', left: left + 'px', top: top + 'px' });
+        if (hasCtfl) {
+          const sp = sprite.phone, s = iw / sp.w;
           Object.assign(ctfl.style, { width: sp.cw * s + 'px', height: sp.ch * s + 'px', left: left + sp.x * s + 'px', top: top + sp.y * s + 'px',
             transformOrigin: sp.px * s + 'px ' + sp.py * s + 'px' });
         }
-        const below = cy + ih / 2 + 16 * (isWide ? Math.min(1, w / 1180, h / 820) : 1);
+        const below = cy + half + 16 * (isWide ? Math.min(1, w / 1180, h / 820) : 1);
         progress.style.top = below + 'px';
         dots.style.top = below + 8 + 'px';
       }
@@ -186,7 +188,7 @@
       }
       setTimeout(() => { if (!closing) root.classList.add('waiting'); }, 2000);
       function fall() {
-        if (closing || !sprite || !ctfl.animate) return;
+        if (closing || !hasCtfl || !ctfl.animate) return;
         const at = (deg, ms, easing) => ({ transform: 'rotate(' + deg + 'deg)', offset: ms / 1140, easing });
         ctfl.animate([
           at(0, 0, 'cubic-bezier(.5, 0, .9, .4)'),
@@ -217,8 +219,9 @@
         sameBuildReload: false,
         stage(key) { label.textContent = stages[key] || ''; },
         add(bytes) { got += bytes; show(); },
-        done() {
+        done(fadeMark) {
           if (closing) return;
+          if (fadeMark) root.classList.add('fadeout');
           closing = true;
           removeEventListener('resize', place);
           got = total;
@@ -231,7 +234,7 @@
           if (total) pct.textContent = '100%';
           setTimeout(() => {
             root.classList.add('leaving');
-            setTimeout(() => root.remove(), 300);
+            setTimeout(() => root.remove(), 350);
           }, 220);
         },
       };
