@@ -1,0 +1,44 @@
+{
+  "id": "GENAI",
+  "label": "生成AI",
+  "chipLabel": "GenAI",
+  "name": "生成AIパスポート",
+  "japaneseName": "生成AIパスポート",
+  "subtitle": "Generative AI Passport 2027",
+  "purchaseSubtitle": "シラバス2027対応",
+  "certificationName": "生成AIパスポート",
+  "isFree": false,
+  "syllabusVersionNote": "生成AIパスポート シラバス2027 対応",
+  "color": {
+    "light": ["#00A3A3", "#008484"],
+    "dark": ["#1AA3A3", "#008C8C"],
+    "buttonLight": ["#00A3A3", "#008484"],
+    "buttonDark": ["#008484", "#006A6A"],
+    "ink": { "light": "#008484", "dark": "#1AA3A3" }
+  },
+  "chapterShortNames": { "1": "基礎と歴史", "2": "生成AI", "3": "AIエージェント", "4": "リスク・倫理", "5": "実践と活用事例" },
+  "chapterSubtitles": { "1": "AIの仕組みと発展の歩み", "2": "生成AIが動く仕組み", "3": "AIエージェントの仕組みと使い方", "4": "安全に使うためのルール", "5": "仕事での使い方と活用例" },
+  "resources": {
+    "catalog": "大纲",
+    "syllabus": "大纲",
+    "syllabusPrefix": "GENAI-Custom",
+    "index": { "official": "../research/生成AIパスポート/大纲结构.json", "version": "2027" }
+  },
+  "mockExam": {
+    "questionCount": 60,
+    "durationMinutes": 60,
+    "passingCount": 42,
+    "passRate": { "label": "2026年8月", "percent": 81.2 },
+    "preparationDays": 60
+  },
+  "free": {
+    "syllabusChapters": ["1"],
+    "sampleChapters": [],
+    "practiceChapters": ["1"],
+    "syllabusSections": ["2.1", "3.1", "4.1", "5.1"],
+    "practiceSections": ["2.1", "3.1", "4.1", "5.1"],
+    "labels": { "free": "範囲", "locked": "残りの節" }
+  },
+  "answerTypes": ["single", "multiple"],
+  "practiceModeSwitch": false
+}

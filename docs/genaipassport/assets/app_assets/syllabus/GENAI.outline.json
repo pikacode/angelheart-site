@@ -1,0 +1,203 @@
+{
+  "id": "genai-custom-2027",
+  "examName": "GENAI",
+  "version": "2027",
+  "language": "ja",
+  "chapters": [
+    {
+      "id": "custom-chapter-1",
+      "number": "1",
+      "title": "AIの基礎と歴史",
+      "sections": [
+        {
+          "id": "custom-section-1.1",
+          "number": "1.1",
+          "title": "AIの定義とルールベース・機械学習"
+        },
+        {
+          "id": "custom-section-1.2",
+          "number": "1.2",
+          "title": "機械学習の流れと代表的な学習手法"
+        },
+        {
+          "id": "custom-section-1.3",
+          "number": "1.3",
+          "title": "ニューラルネットワークの学習と主なモデル"
+        },
+        {
+          "id": "custom-section-1.4",
+          "number": "1.4",
+          "title": "AI研究の歩みとシンギュラリティ"
+        }
+      ]
+    },
+    {
+      "id": "custom-chapter-2",
+      "number": "2",
+      "title": "生成AI",
+      "sections": [
+        {
+          "id": "custom-section-2.1",
+          "number": "2.1",
+          "title": "Transformerと拡散・基盤モデル"
+        },
+        {
+          "id": "custom-section-2.2",
+          "number": "2.2",
+          "title": "LLMの学習の3段階と学習データ・規模"
+        },
+        {
+          "id": "custom-section-2.3",
+          "number": "2.3",
+          "title": "次トークン予測による文章生成"
+        },
+        {
+          "id": "custom-section-2.4",
+          "number": "2.4",
+          "title": "LLMの特性と利用形態"
+        },
+        {
+          "id": "custom-section-2.5",
+          "number": "2.5",
+          "title": "GPTシリーズと主要AIサービス"
+        },
+        {
+          "id": "custom-section-2.6",
+          "number": "2.6",
+          "title": "画像・音楽・音声・動画の生成AI"
+        }
+      ]
+    },
+    {
+      "id": "custom-chapter-3",
+      "number": "3",
+      "title": "AIエージェント",
+      "sections": [
+        {
+          "id": "custom-section-3.1",
+          "number": "3.1",
+          "title": "目標に向けて作業を進めるAIエージェント"
+        },
+        {
+          "id": "custom-section-3.2",
+          "number": "3.2",
+          "title": "外部の文書を検索して答えるRAG"
+        },
+        {
+          "id": "custom-section-3.3",
+          "number": "3.3",
+          "title": "AIエージェントの構成要素と動作の流れ"
+        },
+        {
+          "id": "custom-section-3.4",
+          "number": "3.4",
+          "title": "外部との接続とAIエージェントの連携"
+        },
+        {
+          "id": "custom-section-3.5",
+          "number": "3.5",
+          "title": "主なエージェントツールと導入の実際"
+        },
+        {
+          "id": "custom-section-3.6",
+          "number": "3.6",
+          "title": "AIエージェントのリスク対策と評価"
+        }
+      ]
+    },
+    {
+      "id": "custom-chapter-4",
+      "number": "4",
+      "title": "生成AIのリスク予防・AI倫理・ガバナンス",
+      "sections": [
+        {
+          "id": "custom-section-4.1",
+          "number": "4.1",
+          "title": "生成AIと向き合う姿勢と人の判断"
+        },
+        {
+          "id": "custom-section-4.2",
+          "number": "4.2",
+          "title": "生成AI利用に伴う主なリスク"
+        },
+        {
+          "id": "custom-section-4.3",
+          "number": "4.3",
+          "title": "シャドーAIをめぐる組織と従業員のルール"
+        },
+        {
+          "id": "custom-section-4.4",
+          "number": "4.4",
+          "title": "出力の検証レベルと採否の判断"
+        },
+        {
+          "id": "custom-section-4.5",
+          "number": "4.5",
+          "title": "個人情報と企業機密の入力判断"
+        },
+        {
+          "id": "custom-section-4.6",
+          "number": "4.6",
+          "title": "生成AIをめぐる著作権と知的財産"
+        },
+        {
+          "id": "custom-section-4.7",
+          "number": "4.7",
+          "title": "AIの倫理的課題と事業者向けの指針"
+        },
+        {
+          "id": "custom-section-4.8",
+          "number": "4.8",
+          "title": "生成AI活用を支える組織の仕組みとルール"
+        },
+        {
+          "id": "custom-section-4.9",
+          "number": "4.9",
+          "title": "日本のAI法制と国際協調・安全保障"
+        }
+      ]
+    },
+    {
+      "id": "custom-chapter-5",
+      "number": "5",
+      "title": "生成AIの実践と活用事例",
+      "sections": [
+        {
+          "id": "custom-section-5.1",
+          "number": "5.1",
+          "title": "プロンプトの組み立てと手法"
+        },
+        {
+          "id": "custom-section-5.2",
+          "number": "5.2",
+          "title": "文書業務と伝達での生成AIの使い方"
+        },
+        {
+          "id": "custom-section-5.3",
+          "number": "5.3",
+          "title": "企画と販促の仕事を支える生成AIの使い方"
+        },
+        {
+          "id": "custom-section-5.4",
+          "number": "5.4",
+          "title": "素材づくりと展開への生成AIの使い方"
+        },
+        {
+          "id": "custom-section-5.5",
+          "number": "5.5",
+          "title": "データ分析とリサーチでの生成AI活用"
+        },
+        {
+          "id": "custom-section-5.6",
+          "number": "5.6",
+          "title": "生成AIによる開発支援と業務の自動化"
+        },
+        {
+          "id": "custom-section-5.7",
+          "number": "5.7",
+          "title": "業種ごとの生成AI活用と共通の進め方"
+        }
+      ]
+    }
+  ]
+}

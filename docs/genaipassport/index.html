@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <base href="/genaipassport/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="description" content="生成AIパスポート試験対策。シラバスを読む・問題を解く・模擬試験で試す。">
+
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="生成AIパスポート">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>生成AIパスポート</title>
+  <meta name="theme-color" content="#F2F2F2">
+  <script>
+    (function () {
+      const light = { white: [250, 250, 250], gray: [242, 242, 242], cream: [250, 247, 240], mint: [240, 246, 241], blue: [240, 244, 250] };
+      const darkShift = [234, 233, 231];
+      let rgb = light.gray, mode = '';
+      const prefs = location.pathname.includes('/web-test/') ? 'webtest.' : 'flutter.';
+      try {
+        const saved = JSON.parse(localStorage.getItem(prefs + 'appAppearance.pageBackground') || 'null');
+        if (light[saved]) rgb = light[saved];
+        mode = localStorage.getItem(prefs + 'appAppearance.themeMode') || '';
+      } catch (_) {}
+      const followsSystem = !mode.includes('dark') && !mode.includes('light');
+      const dark = mode.includes('dark') || (followsSystem && matchMedia('(prefers-color-scheme: dark)').matches);
+      const hex = (c) => '#' + c.map((v) => v.toString(16).padStart(2, '0')).join('').toUpperCase();
+      const lightCss = hex(rgb), darkCss = hex(rgb.map((v, i) => Math.max(0, v - darkShift[i])));
+      const css = dark ? darkCss : lightCss;
+      document.documentElement.style.setProperty('--page', css);
+      document.documentElement.style.background = css;
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (followsSystem) {
+        meta.setAttribute('content', lightCss);
+        meta.setAttribute('media', '(prefers-color-scheme: light)');
+        const darkMeta = document.createElement('meta');
+        darkMeta.setAttribute('name', 'theme-color');
+        darkMeta.setAttribute('content', darkCss);
+        darkMeta.setAttribute('media', '(prefers-color-scheme: dark)');
+        meta.after(darkMeta);
+      } else {
+        meta.setAttribute('content', css);
+      }
+    })();
+  </script>
+  <link rel="manifest" href="manifest.json">
+  <link rel="preload" href="https://fonts.gstatic.com/s/roboto/v32/KFOmCnqEu92Fr1Me4GZLCzYlKw.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="modulepreload" href="https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js">
+  <link rel="modulepreload" href="https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js">
+  <link rel="modulepreload" href="https://www.gstatic.com/firebasejs/13.1.0/firebase-firestore-pipelines.js">
+  <script src="./assets/packages/mixpanel_flutter/assets/mixpanel.js"></script>
+  <style>
+    html, body { margin: 0; height: 100%; background: var(--page, #F2F2F2); }
+    #boot { position: fixed; inset: 0; z-index: 10; background: var(--page, #F2F2F2); color: rgba(29, 40, 51, 0.58);
+      font: 15px/20px -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", Roboto, sans-serif; }
+    #boot.dark { background: var(--page, #08090B); color: rgba(238, 242, 245, 0.58); }
+    #boot.leaving, #boot.dark.leaving { background: transparent; pointer-events: none; }
+    #boot img { position: absolute; }
+    #boot .progress { position: absolute; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; transition: opacity .2s linear; }
+    #boot.leaving img { visibility: hidden; }
+    #boot.fadeout.leaving img { visibility: visible; opacity: 0; transition: opacity .3s ease-out; }
+    #boot.leaving .progress { opacity: 0; }
+    #boot .dots { position: absolute; left: 0; right: 0; display: flex; justify-content: center; gap: 8px; visibility: hidden; transition: opacity .2s linear; }
+    #boot.waiting .dots { visibility: visible; }
+    #boot.loading .dots, #boot.quiet .dots { visibility: hidden; }
+    #boot.leaving .dots { opacity: 0; }
+    #boot .dots i { width: 8px; height: 8px; border-radius: 50%; animation: boot-dot 1.2s ease-in-out infinite; }
+    #boot .dots i:nth-child(1) { background: #008484; }
+    #boot .dots i:nth-child(2) { background: #1AA3A3; animation-delay: .15s; }
+    #boot .dots i:nth-child(3) { background: #66C2C2; animation-delay: .3s; }
+    #boot.wide .dots { gap: calc(10px * var(--k)); }
+    #boot.wide .dots i { width: calc(10px * var(--k)); height: calc(10px * var(--k)); }
+    @keyframes boot-dot { 0%, 60%, 100% { transform: translateY(0); opacity: .35; } 30% { transform: translateY(-6px); opacity: 1; } }
+    #boot .progress { visibility: hidden; }
+    #boot.loading .progress { visibility: visible; }
+    #boot.quiet img { visibility: hidden; }
+    #boot .track { width: min(300px, calc(100vw - 80px)); height: 8px; border-radius: 4px; overflow: hidden; background: rgba(29, 40, 51, 0.08); }
+    #boot.dark .track { background: rgba(238, 242, 245, 0.12); }
+    #boot .fill { height: 100%; width: 100%; clip-path: inset(0 100% 0 0 round 4px); transition: clip-path .2s linear;
+      background: #008484; }
+    #boot.dark .fill { background: #1AA3A3; }
+    #boot .line { margin-top: 14px; display: flex; gap: 8px; font-variant-numeric: tabular-nums; }
+    #boot.wide { font-size: calc(17px * var(--k)); line-height: calc(24px * var(--k)); }
+    #boot.wide .track { width: calc(405px * var(--k)); height: calc(10px * var(--k)); border-radius: calc(5px * var(--k)); }
+    #boot.wide .line { margin-top: calc(16px * var(--k)); }
+    #about { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  </style>
+</head>
+<body>
+  <div id="boot" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="読み込み中">
+    <img class="base" alt=""><img class="ctfl" alt="">
+    <div class="dots"><i></i><i></i><i></i></div>
+    <div class="progress"><div class="track"><div class="fill"></div></div><div class="line"><span class="label">AIを起動中</span><span class="pct"></span></div></div>
+  </div>
+  <script>
+    (function () {
+      const root = document.getElementById('boot');
+      const fill = root.querySelector('.fill'), label = root.querySelector('.label'), pct = root.querySelector('.pct');
+      const img = root.querySelector('img.base'), ctfl = root.querySelector('img.ctfl');
+      const progress = root.querySelector('.progress'), dots = root.querySelector('.dots');
+      let dark = false;
+      try {
+        const prefs = location.pathname.includes('/web-test/') ? 'webtest.' : 'flutter.';
+        const mode = localStorage.getItem(prefs + 'appAppearance.themeMode') || '';
+        dark = mode.includes('dark') || (!mode.includes('light') && matchMedia('(prefers-color-scheme: dark)').matches);
+      } catch (_) {}
+      if (dark) root.classList.add('dark');
+      const sprite = {"phone":{"boxW":340}};
+      const stages = {"engine":"AIを起動中","screen":"画面を生成中","settings":"設定を学習中","fonts":"文字を推論中","syllabus":"シラバスを読み込み中"};
+      const hasCtfl = !!(sprite && sprite.phone.cw);
+      if (!sprite) img.remove();
+      if (!hasCtfl) ctfl.remove();
+      let wide = null;
+      function place() {
+        const w = innerWidth, h = innerHeight, isWide = w >= 874;
+        let cy, iw, ih, half;
+        const box = sprite ? sprite.phone : {};
+        if (isWide) {
+          const k = Math.min(1, w / 1180, h / 820);
+          iw = box.boxW || 230; ih = box.boxH || 140; half = 70; cy = (h - 874 * k) / 2 + 324 * k;
+          root.style.setProperty('--k', k);
+        } else {
+          iw = box.boxW || 230; ih = box.boxH || 140; half = 70; cy = h * 324 / 874;
+        }
+        if (isWide !== wide) {
+          wide = isWide;
+          root.classList.toggle('wide', isWide);
+        }
+        if (sprite && img.dataset.wide !== String(isWide)) {
+          img.dataset.wide = String(isWide);
+          const suffix = (dark ? '-dark' : '') + '.png';
+          img.src = 'boot/base' + suffix;
+          if (hasCtfl) ctfl.src = 'boot/ctfl' + suffix;
+        }
+        const left = (w - iw) / 2, top = cy - ih / 2;
+        if (sprite) Object.assign(img.style, { width: iw + 'px', height: ih + 'px', left: left + 'px', top: top + 'px' });
+        if (hasCtfl) {
+          const sp = sprite.phone, s = iw / sp.w;
+          Object.assign(ctfl.style, { width: sp.cw * s + 'px', height: sp.ch * s + 'px', left: left + sp.x * s + 'px', top: top + sp.y * s + 'px',
+            transformOrigin: sp.px * s + 'px ' + sp.py * s + 'px' });
+        }
+        const below = cy + half + 16 * (isWide ? Math.min(1, w / 1180, h / 820) : 1);
+        progress.style.top = below + 'px';
+        dots.style.top = below + 8 + 'px';
+      }
+      place();
+      addEventListener('resize', place);
+      let total = 0, got = 0, closing = false, stamp = null;
+      const stampKey = location.pathname.includes('/web-test/') ? 'jstqbBootStamp-test' : 'jstqbBootStamp';
+      let seenStamp = null;
+      try { seenStamp = localStorage.getItem(stampKey); } catch (_) {}
+      const isReload = performance.getEntriesByType('navigation')[0]?.type === 'reload';
+      if (isReload && seenStamp) {
+        root.classList.add('quiet');
+        setTimeout(() => {
+          root.classList.remove('quiet');
+          if (!closing && !root.classList.contains('loading')) setTimeout(fall, 300);
+        }, 500);
+      }
+      setTimeout(() => { if (!closing) root.classList.add('waiting'); }, 2000);
+      function fall() {
+        if (closing || !hasCtfl || !ctfl.animate) return;
+        const at = (deg, ms, easing) => ({ transform: 'rotate(' + deg + 'deg)', offset: ms / 1140, easing });
+        ctfl.animate([
+          at(0, 0, 'cubic-bezier(.5, 0, .9, .4)'),
+          at(-9, 550, 'cubic-bezier(.2, .6, .4, 1)'),
+          at(-5.5, 750, 'cubic-bezier(.5, 0, .9, .5)'),
+          at(-9, 920, 'cubic-bezier(.2, .6, .4, 1)'),
+          at(-8, 1040, 'cubic-bezier(.5, 0, .9, .5)'),
+          at(-9, 1140, 'linear'),
+        ], { duration: 1140, fill: 'forwards' });
+      }
+      function show() {
+        if (!total) return;
+        const v = Math.min(99, Math.floor(got * 100 / total));
+        fill.style.clipPath = 'inset(0 ' + (100 - v) + '% 0 0 round 4px)';
+        pct.textContent = v + '%';
+        root.setAttribute('aria-valuenow', String(v));
+      }
+      window.jstqbBoot = {
+        total(bytes) { total = bytes; show(); },
+        seen(value) {
+          stamp = value;
+          const same = value === seenStamp;
+          if (!same) root.classList.remove('quiet');
+          this.sameBuildReload = same && isReload;
+          return same;
+        },
+        loading() { root.classList.remove('quiet'); root.classList.add('loading'); },
+        sameBuildReload: false,
+        stage(key) { label.textContent = stages[key] || ''; },
+        add(bytes) { got += bytes; show(); },
+        done(fadeMark) {
+          if (closing) return;
+          if (fadeMark) root.classList.add('fadeout');
+          closing = true;
+          removeEventListener('resize', place);
+          got = total;
+          try {
+            const marks = performance.getEntriesByType('mark').filter((m) => m.name.startsWith('jstqb:'));
+            console.info('[启动耗时 ms]', marks.map((m) => m.name.slice(6) + ' ' + Math.round(m.startTime)).join(', ') + ', 出页面 ' + Math.round(performance.now()));
+          } catch (_) {}
+          try { if (stamp) localStorage.setItem(stampKey, stamp); } catch (_) {}
+          fill.style.clipPath = 'inset(0 0 0 0 round 4px)';
+          if (total) pct.textContent = '100%';
+          setTimeout(() => {
+            root.classList.add('leaving');
+            setTimeout(() => root.remove(), 350);
+          }, 220);
+        },
+      };
+    })();
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
