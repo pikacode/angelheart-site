@@ -1,18 +1,18 @@
 {
   "tab": {
     "nodes": [
-      {"id": "o", "x": 3.25, "y": 9.44, "r": 2.7, "hollow": false, "color": "#0E1A22"},
-      {"id": "h1", "x": 13.79, "y": 3.59, "r": 2.15, "hollow": true, "color": "#2E9E9A"},
-      {"id": "h3", "x": 10.17, "y": 21.41, "r": 1.8, "hollow": true, "color": "#2E9E9A"},
-      {"id": "h2", "x": 11.44, "y": 12.21, "r": 1.9, "hollow": false, "color": "#F0A800"},
-      {"id": "a1", "x": 21.75, "y": 9.07, "r": 1.8, "hollow": false, "color": "#008484"},
-      {"id": "a2", "x": 20.01, "y": 18.86, "r": 2.1, "hollow": false, "color": "#008484"}
+      {"id": "o", "x": 3.25, "y": 9.44, "r": 4.05, "hollow": false, "color": "#0E1A22"},
+      {"id": "h1", "x": 13.79, "y": 3.59, "r": 3.225, "hollow": true, "color": "#2E9E9A"},
+      {"id": "h3", "x": 10.17, "y": 21.41, "r": 2.7, "hollow": true, "color": "#2E9E9A"},
+      {"id": "h2", "x": 11.44, "y": 12.21, "r": 2.85, "hollow": false, "color": "#F0A800"},
+      {"id": "a1", "x": 21.75, "y": 9.07, "r": 2.7, "hollow": false, "color": "#008484"},
+      {"id": "a2", "x": 20.01, "y": 18.86, "r": 3.15, "hollow": false, "color": "#008484"}
     ],
     "baseAngle": 89,
     "angle": 87,
-    "stickWidth": 0.9,
+    "stickWidth": 2.0,
     "stickColor": "#969695",
-    "hollowWidth": 1.1,
+    "hollowWidth": 1.9,
     "knockout": 0.4,
     "idleEdges": [["h1", "o"], ["h3", "o"]],
     "plan": [["h1", "a1", 60], ["o", "h2", 130], ["h3", "a2", 210], ["a1", "h2", 30], ["a2", "h1", 20], ["h2", "a2", 60], ["a1", "h3", 90]],

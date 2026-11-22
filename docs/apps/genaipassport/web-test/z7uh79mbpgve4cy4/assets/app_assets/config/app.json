@@ -39,6 +39,7 @@
     "startButton": "AIの学習を始めよう",
     "welcomeMessage": ["いっしょに合格を目指しましょう。", "読む・解く・試すで、しっかり対策。"],
     "appStoreID": "6832014290",
+    "appStoreProviderToken": "129453709",
     "supportEmail": "support@angelheart.ai",
     "links": {
       "privacy": "https://angelheart.ai/apps/genaipassport/privacy/",
