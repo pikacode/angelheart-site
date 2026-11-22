@@ -1,7 +1,6 @@
 {
   "schemaVersion": 1,
   "appID": "genaipassport",
-  "inDevelopment": true,
   "brand": {
     "name": {
       "latin": "生成AIパスポート",
@@ -96,6 +95,14 @@
     "root": "apps/genaipassport/users/{uid}"
   },
   "firebase": {
+    "android": {
+      "apiKey": "AIzaSyDBR8Edsi1tVEkQZeHY1Hmf7OYQ1N0_ZHU",
+      "appId": "1:23389998110:android:75d2ae6f66e5128c71320f",
+      "messagingSenderId": "23389998110",
+      "projectId": "pikacode-jstqb",
+      "authDomain": "angelheart.ai",
+      "storageBucket": "pikacode-jstqb.firebasestorage.app"
+    },
     "web": {
       "apiKey": "AIzaSyBrY_wuvG5ZpDSm8yvPCbWwJ6xTk8IHSgA",
       "appId": "1:23389998110:web:12380602d41bc97f71320f",
@@ -134,7 +141,8 @@
   },
   "revenueCat": {
     "apiKeys": {
-      "ios": "appl_laxnyiIDqPHlHhIVDVHhFsdJpqf"
+      "ios": "appl_laxnyiIDqPHlHhIVDVHhFsdJpqf",
+      "android": "goog_fUTrlqphTiGtFJmwBAHBErLdsXu"
     }
   },
   "questionApi": "https://jstqb-questions.pikacode.workers.dev",
