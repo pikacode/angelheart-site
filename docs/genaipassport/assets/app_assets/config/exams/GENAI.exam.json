@@ -32,12 +32,9 @@
     "preparationDays": 60
   },
   "free": {
-    "syllabusChapters": ["1"],
-    "sampleChapters": [],
-    "practiceChapters": ["1"],
-    "syllabusSections": ["2.1", "3.1", "4.1", "5.1"],
-    "practiceSections": ["2.1", "3.1", "4.1", "5.1"],
-    "labels": { "free": "範囲", "locked": "残りの節" }
+    "chapters": ["1"],
+    "sections": ["2.1", "3.1", "4.1", "5.1"],
+    "labels": {"free": "範囲", "locked": "残りの節"}
   },
   "answerTypes": ["single", "multiple"],
   "practiceModeSwitch": false
