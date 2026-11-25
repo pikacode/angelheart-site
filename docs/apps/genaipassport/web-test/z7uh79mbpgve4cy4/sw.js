@@ -9,12 +9,18 @@
 
 // 缓存名带本页的路径：网页正式版（/jstqb/）和测试版（/apps/jstqb/web-test/…/）在同一个网站下，浏览器缓存按网站共用，
 // 不带路径的话两边每次打开都把对方的缓存当旧版删掉（JST-230，11-05）。
-const prefix = 'jstqb-app-' + new URL(self.registration.scope).pathname + '-';
+// 名字不带 App 名（全量代码审查 D13）：几个 App 共用这一份 sw.js，路径已经分开了。
+const scopePath = new URL(self.registration.scope).pathname;
+const prefix = 'app-' + scopePath + '-';
+// 1.3.1 以前叫 jstqb-app-<路径>-，只删本页路径的（别的 App 的旧缓存由它自己的 sw.js 删）；
 // 11-05 以前的缓存名不带路径（jstqb-app-v2-<stamp>），见到就删。
+const oldPrefix = 'jstqb-app-' + scopePath + '-';
 const legacy = /^jstqb-app-v\d+-/;
 // v2-：11-03 起本版缓存只存带版本记号取来的文件；名字换一下，旧 sw.js 在交接那一次可能存进去的混版缓存一律作废。
 const generation = 'v2-';
-const externalCache = 'jstqb-ext-1';
+const externalCache = 'app-ext-1';
+// 1.3.1 以前的外部文件缓存名，内容一样，换名后删掉。
+const oldExternalCache = 'jstqb-ext-1';
 const neverCache = ['boot_sizes.json', 'flutter_bootstrap.js', 'sw.js', 'index.html'];
 let stamp = null;
 
@@ -35,7 +41,7 @@ async function refreshStamp() {
     if (typeof value !== 'string' || !value) throw new Error('没有 stamp');
     const keep = prefix + generation + value;
     for (const name of await caches.keys()) {
-      if ((name.startsWith(prefix) && name !== keep) || legacy.test(name)) await caches.delete(name);
+      if ((name.startsWith(prefix) && name !== keep) || name.startsWith(oldPrefix) || name === oldExternalCache || legacy.test(name)) await caches.delete(name);
     }
     return value;
   } catch (_) {

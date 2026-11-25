@@ -44,7 +44,7 @@ _flutter.buildConfig = {"engineRevision":"deb287481e3ce9468f3434937ced4240a70539
 
 
 (async () => {
-  const boot = window.jstqbBoot;
+  const boot = window.appBoot;
   // 离线缓存（web/sw.js）：本版文件存在浏览器里，刷新不再逐个问服务器（pika 10-31）。第一次打开时装上，下次刷新起生效。
   try { navigator.serviceWorker?.register('sw.js').catch(() => {}); } catch (_) {}
   // 同 Flutter 的判断（flutter.js：hasImageCodecs && hasChromiumBreakIterators）：Chrome、Edge 用 chromium 版引擎，其余用 full 版。
@@ -79,13 +79,13 @@ _flutter.buildConfig = {"engineRevision":"deb287481e3ce9468f3434937ced4240a70539
   boot?.stage('engine');
   await Promise.all(['main.dart.js', engine + 'canvaskit.js', engine + 'canvaskit.wasm'].map(prefetch));
   clearTimeout(slow);
-  performance.mark('jstqb:下完程序和引擎');
+  performance.mark('app:下完程序和引擎');
   boot?.stage('screen');
   _flutter.loader.load({
     config: { canvasKitBaseUrl: 'canvaskit/', canvasKitVariant: chromium ? 'chromium' : 'full' },
     onEntrypointLoaded: async (engineInitializer) => {
       const appRunner = await engineInitializer.initializeEngine();
-      performance.mark('jstqb:引擎就绪');
+      performance.mark('app:引擎就绪');
       // 之后由 Dart（main.dart）接着报，launch_gate.dart 在第一帧后收起。
       await appRunner.runApp();
     },

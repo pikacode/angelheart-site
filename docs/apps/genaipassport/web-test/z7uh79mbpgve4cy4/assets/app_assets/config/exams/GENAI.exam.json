@@ -4,7 +4,7 @@
   "chipLabel": "GenAI",
   "name": "生成AIパスポート",
   "japaneseName": "生成AIパスポート",
-  "subtitle": "2027年2月試験〜",
+  "subtitle": "Generative AI Passport 2027",
   "purchaseSubtitle": "シラバス2027対応",
   "certificationName": "生成AIパスポート",
   "isFree": false,
@@ -32,12 +32,9 @@
     "preparationDays": 60
   },
   "free": {
-    "syllabusChapters": ["1"],
-    "sampleChapters": [],
-    "practiceChapters": ["1"],
-    "syllabusSections": ["2.1", "3.1", "4.1", "5.1"],
-    "practiceSections": ["2.1", "3.1", "4.1", "5.1"],
-    "labels": { "free": "範囲", "locked": "残りの節" }
+    "chapters": ["1"],
+    "sections": ["2.1", "3.1", "4.1", "5.1"],
+    "labels": {"free": "範囲", "locked": "残りの節"}
   },
   "answerTypes": ["single", "multiple"],
   "practiceModeSwitch": false
