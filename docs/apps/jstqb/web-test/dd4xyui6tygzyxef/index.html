@@ -208,7 +208,7 @@
         pct.textContent = v + '%';
         root.setAttribute('aria-valuenow', String(v));
       }
-      window.jstqbBoot = {
+      window.appBoot = {
         total(bytes) { total = bytes; show(); },
         seen(value) {
           stamp = value;
@@ -228,7 +228,7 @@
           removeEventListener('resize', place);
           got = total;
           try {
-            const marks = performance.getEntriesByType('mark').filter((m) => m.name.startsWith('jstqb:'));
+            const marks = performance.getEntriesByType('mark').filter((m) => m.name.startsWith('app:'));
             console.info('[启动耗时 ms]', marks.map((m) => m.name.slice(6) + ' ' + Math.round(m.startTime)).join(', ') + ', 出页面 ' + Math.round(performance.now()));
           } catch (_) {}
           try { if (stamp) localStorage.setItem(stampKey, stamp); } catch (_) {}
