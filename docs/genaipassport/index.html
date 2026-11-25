@@ -22,7 +22,7 @@
       const light = { white: [250, 250, 250], gray: [242, 242, 242], cream: [250, 247, 240], mint: [240, 246, 241], blue: [240, 244, 250] };
       const darkShift = [234, 233, 231];
       let rgb = light.gray, mode = '';
-      const prefs = location.pathname.includes('/web-test/') ? 'webtest.' : 'flutter.';
+      const prefs = location.pathname.includes('/web-test/') ? 'genaipassport-test.' : 'genaipassport.';
       try {
         const saved = JSON.parse(localStorage.getItem(prefs + 'appAppearance.pageBackground') || 'null');
         if (light[saved]) rgb = light[saved];
@@ -106,7 +106,7 @@
       const progress = root.querySelector('.progress'), dots = root.querySelector('.dots');
       let dark = false;
       try {
-        const prefs = location.pathname.includes('/web-test/') ? 'webtest.' : 'flutter.';
+        const prefs = location.pathname.includes('/web-test/') ? 'genaipassport-test.' : 'genaipassport.';
         const mode = localStorage.getItem(prefs + 'appAppearance.themeMode') || '';
         dark = mode.includes('dark') || (!mode.includes('light') && matchMedia('(prefers-color-scheme: dark)').matches);
       } catch (_) {}
@@ -152,7 +152,7 @@
       place();
       addEventListener('resize', place);
       let total = 0, got = 0, closing = false, stamp = null;
-      const stampKey = location.pathname.includes('/web-test/') ? 'jstqbBootStamp-test' : 'jstqbBootStamp';
+      const stampKey = location.pathname.includes('/web-test/') ? 'genaipassport-bootStamp-test' : 'genaipassport-bootStamp';
       let seenStamp = null;
       try { seenStamp = localStorage.getItem(stampKey); } catch (_) {}
       const isReload = performance.getEntriesByType('navigation')[0]?.type === 'reload';
@@ -183,7 +183,7 @@
         pct.textContent = v + '%';
         root.setAttribute('aria-valuenow', String(v));
       }
-      window.jstqbBoot = {
+      window.appBoot = {
         total(bytes) { total = bytes; show(); },
         seen(value) {
           stamp = value;
@@ -203,7 +203,7 @@
           removeEventListener('resize', place);
           got = total;
           try {
-            const marks = performance.getEntriesByType('mark').filter((m) => m.name.startsWith('jstqb:'));
+            const marks = performance.getEntriesByType('mark').filter((m) => m.name.startsWith('app:'));
             console.info('[启动耗时 ms]', marks.map((m) => m.name.slice(6) + ' ' + Math.round(m.startTime)).join(', ') + ', 出页面 ' + Math.round(performance.now()));
           } catch (_) {}
           try { if (stamp) localStorage.setItem(stampKey, stamp); } catch (_) {}
